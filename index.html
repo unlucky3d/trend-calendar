@@ -126,6 +126,7 @@ li.bar>*{position:relative}
 <div class="shell">
   <nav aria-label="메뉴">
     <a href="#calendar" style="--c:var(--accent)">달력</a>
+    <a href="#news" data-today style="--c:var(--live)">스트리머 소식</a>
     <a href="#soop" data-today style="--c:var(--soop)">SOOP 트렌드</a>
     <a href="#games" data-today style="--c:var(--twitch)">게임 트렌드</a>
     <div class="sub">다가오는 신작</div>
@@ -240,6 +241,8 @@ function renderDay(){
     listCard('SOOP 인기 카테고리','시청자 수',cats.slice(0,15),(c,i)=>row(i,c.name,'',num(c.viewers),null,Math.round((+c.viewers||0)/maxV*100)),'soop'),
     listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),'soop'),
     listCard('방송 제목 키워드',s.soopSample?'인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),'soop'));
+  const news=arr(s.soopNews);
+  if(news.length){const nw=el('div','cards');nw.append(listCard('방송국 게시글','최근 5일',news.slice(0,20),(p,i)=>row(i,p.title,p.nick+(p.hot?' · 모집·일정':'')+(p.body?' · '+p.body.slice(0,60):''),String(p.date).slice(5,10).replace('-','/'),p.url),'live'));body.append(section('스트리머 소식','live','news'),nw)}
   body.append(section('SOOP 트렌드','soop','soop'),soop);
   const steam=(g,i,sub)=>row(i,g.name,sub,num(g.players)+'명',g.url);
   const gm=el('div','cards');

@@ -228,7 +228,14 @@ function renderDay(){
       if(g.note)row.append(el('span','',g.note));r.append(row)});
     c.append(r);body.append(c);
   }
-  const s=state.snaps[state.sel];
+  let s=state.snaps[state.sel];
+  if(!s){
+    const k=Object.keys(state.snaps).filter(d=>d<=state.sel).sort().pop();
+    if(k){
+      s=state.snaps[k];const p=k.split('-').map(Number);
+      body.append(el('div','empty',(state.sel>=state.today?'아직 이날 수집 전입니다. ':'이날 수집된 기록이 없습니다. ')+'가장 최근인 '+p[1]+'월 '+p[2]+'일 기록을 보여줍니다.'));
+    }
+  }
   if(!s){
     body.append(el('div','empty',!state.ready?(state.err||'트렌드 기록을 불러오는 중입니다')
       :state.sel>state.today?'아직 오지 않은 날입니다. 출시 일정만 표시됩니다.'
@@ -299,6 +306,7 @@ async function loadGames(){
 }
 const _rc=renderCal;renderCal=function(){_rc();loadMonth(vy,vm)};
 loadGames();loadMonth(vy,vm);
+{const p=new Date(Date.UTC(vy,vm-2,1));loadMonth(p.getUTCFullYear(),p.getUTCMonth()+1)}
 setInterval(()=>{const t=kstToday().split('-').map(Number);state.today=kstToday();loadMonth(t[0],t[1],true);loadGames()},10*60*1000);
 </script>
 

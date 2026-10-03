@@ -8,7 +8,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WATCH = os.path.join(ROOT, "data", "streamers.json")
 LIVE = ("https://live.sooplive.co.kr/api/main_broad_list_api.php?selectType=action"
         "&selectValue=all&orderType=view_cnt&pageNo=1&lang=ko_KR")
-TOP = 40    # 지금 시청자 상위 몇 명까지 함께 볼지
+TOP = 120   # 지금 시청자 상위 몇 명까지 함께 볼지
 DAYS = 5    # 최근 며칠 글까지
 # 제목에 이 단어가 들어간 글만 보여 준다
 HOT = re.compile(r"신청|모집|발표|서버|참가|합격|대회|컨텐츠|콘텐츠|내전|선발|오디션|시참")
@@ -27,11 +27,12 @@ def main():
     names = {}
     if os.path.exists(WATCH):
         for s in json.load(open(WATCH, encoding="utf-8")):
-            names[s["id"]] = s.get("name") or s["id"]
+            names[s["id"]] = s.get("name") or ""
     watched = set(names)
     try:
-        for b in (json.loads(get(LIVE)).get("broad") or [])[:TOP]:
-            names.setdefault(b["user_id"], b.get("user_nick") or b["user_id"])
+        for page in range(1, TOP // 60 + 1):
+            for b in json.loads(get(LIVE.replace("pageNo=1", "pageNo=%d" % page))).get("broad") or []:
+                names.setdefault(b["user_id"], b.get("user_nick") or b["user_id"])
     except Exception as e:
         print("FAIL live list", repr(e)[:200])
     posts, failed = [], 0
@@ -47,14 +48,16 @@ def main():
             if date < since or not hit:
                 continue
             body = re.sub(r"\s+", " ", p.get("content") or "")[:120]
-            posts.append({"id": uid, "nick": name, "title": title[:100], "body": body, "date": date[:16], "reads": int((p.get("count") or {}).get("read_cnt") or 0),
+            posts.append({"id": uid, "nick": name or p.get("user_nick") or uid, "title": title[:100], "body": body, "date": date[:16], "reads": int((p.get("count") or {}).get("read_cnt") or 0),
                           "hot": True, "tag": hit.group(0), "watched": uid in watched,
-                          "url": "https://ch.sooplive.co.kr/%s/post/%s" % (uid, p.get("title_no"))})
+                          "url": "https://www.sooplive.com/station/%s/post/%s" % (uid, p.get("title_no"))})
     if not posts and failed:
         print("FAIL streamer news: 방송국", failed, "곳 모두 실패")
         return
     # 모집·일정 글 먼저, 그 안에서 조회수 많은(인기 스트리머) 순
     posts.sort(key=lambda p: (not p["hot"], -p["reads"]))
+    seen = set()  # 같은 스트리머가 같은 제목으로 다시 올린 글은 조회수 높은 것만
+    posts = [p for p in posts if not ((p["id"], p["title"]) in seen or seen.add((p["id"], p["title"])))]
     path = os.path.join(ROOT, "data", "snapshots", today[:7] + ".json")
     month = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
     month.setdefault(today, {"date": today})["soopNews"] = posts[:40]

@@ -242,7 +242,7 @@ function renderDay(){
     listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),'soop'),
     listCard('방송 제목 키워드',s.soopSample?'인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),'soop'));
   const news=arr(s.soopNews);
-  if(news.length){const nw=el('div','cards');nw.append(listCard('콘텐츠 공지','방송국 게시글 · 최근 5일',news.slice(0,20),(p,i)=>row(i,p.title,p.nick+(p.reads?' · 조회 '+num(p.reads):'')+(p.tag?' · '+p.tag:'')+(p.body?' · '+p.body.slice(0,60):''),String(p.date).slice(5,10).replace('-','/'),p.url),'live'));body.append(section('스트리머 소식','live','news'),nw)}
+  if(news.length){const nw=el('div','cards');nw.append(listCard('콘텐츠 공지','방송국 게시글 · 최근 5일',news.slice(0,40),(p,i)=>row(i,p.title,p.nick+(p.viewers?' · 시청자 '+num(p.viewers)+'명':p.peak?' · 최고 시청자 '+num(p.peak)+'명':'')+(p.reads?' · 조회 '+num(p.reads):'')+(p.tag?' · '+p.tag:'')+(p.body?' · '+p.body.slice(0,60):''),String(p.date).slice(5,10).replace('-','/'),p.url),'live'));body.append(section('스트리머 소식','live','news'),nw)}
   body.append(section('SOOP 트렌드','soop','soop'),soop);
   const steam=(g,i,sub)=>row(i,g.name,sub,num(g.players)+'명',g.url);
   const gm=el('div','cards');

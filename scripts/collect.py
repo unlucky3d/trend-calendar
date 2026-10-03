@@ -89,7 +89,7 @@ def summary(snap, today):
     cats = snap.get("soopCategories") or []
     if cats:
         lines.append("SOOP 인기 카테고리: " + ", ".join(c["name"] for c in cats[:3]))
-    g = snap.get("google") or []
+    g = []
     if g:
         lines.append("검색 급상승: " + ", ".join(x["title"] for x in g[:3]))
     try:
@@ -111,8 +111,7 @@ def main():
     if os.path.exists(path):
         month = json.load(open(path, encoding="utf-8"))
     snap = month.get(today, {"date": today})
-    sources = {"soopCategories": soop_categories, "soopLive": soop_live, "google": google,
-               "community": community, "youtube": youtube}
+    sources = {"soopCategories": soop_categories, "soopLive": soop_live}
     ok = 0
     for key, fn in sources.items():
         try:

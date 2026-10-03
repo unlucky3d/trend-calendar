@@ -112,7 +112,7 @@ def main():
         month = json.load(open(path, encoding="utf-8"))
     snap = month.get(today, {"date": today})
     sources = {"soopCategories": soop_categories, "soopLive": soop_live, "google": google,
-               "news": news, "community": community, "youtube": youtube}
+               "community": community, "youtube": youtube}
     ok = 0
     for key, fn in sources.items():
         try:

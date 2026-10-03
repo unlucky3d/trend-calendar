@@ -66,7 +66,11 @@ def steam_name(appid, cache):
             d = json.loads(get("https://store.steampowered.com/api/appdetails?appids=%s&filters=basic&l=koreana&cc=kr" % key))
             cache[key] = d[key]["data"]["name"]
         except Exception:
-            return "앱 " + key
+            try:  # 한국 스토어에 없는 게임은 해외 스토어 이름으로
+                d = json.loads(get("https://store.steampowered.com/api/appdetails?appids=%s&filters=basic&l=koreana&cc=us" % key))
+                cache[key] = d[key]["data"]["name"] + " (한국 스팀 미판매)"
+            except Exception:
+                return "앱 " + key
     return cache[key]
 
 

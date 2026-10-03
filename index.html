@@ -129,6 +129,7 @@ li.bar>*{position:relative}
     <a href="#news" data-today style="--c:var(--live)">스트리머 소식</a>
     <a href="#soop" data-today style="--c:var(--soop)">SOOP 트렌드</a>
     <a href="#games" data-today style="--c:var(--twitch)">게임 트렌드</a>
+    <a href="#food" data-today style="--c:var(--chzzk)">신메뉴</a>
     <div class="sub">다가오는 신작</div>
     <div id="upcoming"></div>
   </nav>
@@ -253,6 +254,12 @@ function renderDay(){
     listCard('스팀 동시 접속','전 세계 · 오늘 최고',arr(s.steamTop).slice(0,15),(g,i)=>steam(g,i,''),'steam'),
     listCard('스팀 최고 판매','한국',arr(s.steamSellers).slice(0,10),(g,i)=>row(i,g.name,'','',g.url),'steam'));
   if(['chzzk','twitch','steamRising','steamTop','steamSellers'].some(k=>arr(s[k]).length))body.append(section('게임 트렌드','twitch','games'),gm);
+  const fd=s.food||{};
+  if(arr(fd.franchise).length||arr(fd.cvs).length){
+    const f=el('div','cards');const fr=(n,i)=>row(i,n.title,[n.brand,n.source].filter(Boolean).join(' · '),String(n.date||'').slice(5).replace('-','/'),n.url);
+    f.append(listCard('프랜차이즈 신메뉴','최근 2주 기사',arr(fd.franchise).slice(0,15),fr,'chzzk'),listCard('편의점 신상','최근 2주 기사',arr(fd.cvs).slice(0,10),fr,'chzzk'));
+    body.append(section('신메뉴','chzzk','food'),f);
+  }
 }
 
 function renderUpcoming(){

@@ -45,15 +45,14 @@ def main():
             if date < since or len(title) < 4:
                 continue
             body = re.sub(r"\s+", " ", p.get("content") or "")[:120]
-            posts.append({"id": uid, "nick": name, "title": title[:100], "body": body, "date": date[:16],
+            posts.append({"id": uid, "nick": name, "title": title[:100], "body": body, "date": date[:16], "reads": int((p.get("count") or {}).get("read_cnt") or 0),
                           "hot": bool(HOT.search(title + " " + body)), "watched": uid in watched,
                           "url": "https://ch.sooplive.co.kr/%s/post/%s" % (uid, p.get("title_no"))})
     if not posts and failed:
         print("FAIL streamer news: 방송국", failed, "곳 모두 실패")
         return
-    # 지켜보는 스트리머 → 모집·신청 글 → 최신 순
-    posts.sort(key=lambda p: p["date"], reverse=True)
-    posts.sort(key=lambda p: (not p["watched"], not p["hot"]))
+    # 모집·일정 글 먼저, 그 안에서 조회수 많은(인기 스트리머) 순
+    posts.sort(key=lambda p: (not p["hot"], -p["reads"]))
     path = os.path.join(ROOT, "data", "snapshots", today[:7] + ".json")
     month = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
     month.setdefault(today, {"date": today})["soopNews"] = posts[:40]

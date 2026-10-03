@@ -20,6 +20,7 @@ jobs:
       - run: python scripts/keywords.py
       - run: python scripts/games_trend.py
       - run: python scripts/streamer_news.py || true
+      - run: python scripts/food_news.py || true
       - name: 변경 사항 저장
         run: |
           git config user.name "trend-bot"

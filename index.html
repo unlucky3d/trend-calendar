@@ -6,110 +6,134 @@
 <title>방송 트렌드 달력</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
 <style>
-/* 레이아웃: 상단 바 + 왼쪽 메뉴 + 본문(월 달력 → 선택한 날의 트렌드 카드 그리드). 방송 플랫폼 홈처럼 흰 바탕, 파란 강조, 둥근 칩 */
+/* 레이아웃: 상단 바 + 왼쪽 메뉴 + 본문(월 달력 → 선택한 날의 트렌드 카드). 흰 바탕, 파란 강조, 플랫폼별 색 점 */
 :root{
-  --bg:#f5f6f8; --surface:#ffffff; --line:#e3e6ec; --fg:#17191f; --muted:#6b7280;
-  --accent:#0f5ee8; --accent-soft:#e6efff; --accent-fg:#ffffff;
-  --live:#f0353c; --chip:#eef0f4; --bar:#cfe0ff;
+  --bg:#f3f5f9; --surface:#ffffff; --line:#e4e8ef; --fg:#14171f; --muted:#69728a;
+  --accent:#1a5cff; --accent-soft:#e8efff; --accent-fg:#ffffff;
+  --live:#ff3b47; --chip:#eff2f7; --bar:#dbe6ff; --sun:#e5484d; --sat:#1a5cff;
+  --soop:#1a5cff; --chzzk:#00c781; --twitch:#9146ff; --steam:#2a475e;
+  --shadow:0 1px 2px rgba(20,23,31,.04),0 8px 24px rgba(20,23,31,.06);
   --font:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0e1014; --surface:#181b21; --line:#2a2e37; --fg:#eceef2; --muted:#9aa1ad;
-  --accent:#5b93ff; --accent-soft:#1b2a4a; --accent-fg:#0b0d11;
-  --live:#ff5a60; --chip:#242831; --bar:#23386a; color-scheme:dark}}
+  --bg:#0b0d12; --surface:#151821; --line:#252a36; --fg:#eef0f5; --muted:#8f97aa;
+  --accent:#6a9bff; --accent-soft:#18233f; --accent-fg:#0b0d12;
+  --live:#ff5a64; --chip:#1f2430; --bar:#1d2f5c; --sun:#ff7a7f; --sat:#7aa6ff;
+  --soop:#6a9bff; --chzzk:#1fe0a0; --twitch:#a970ff; --steam:#66c0f4;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e1014; --surface:#181b21; --line:#2a2e37; --fg:#eceef2; --muted:#9aa1ad;
-  --accent:#5b93ff; --accent-soft:#1b2a4a; --accent-fg:#0b0d11;
-  --live:#ff5a60; --chip:#242831; --bar:#23386a; color-scheme:dark}
+  --bg:#0b0d12; --surface:#151821; --line:#252a36; --fg:#eef0f5; --muted:#8f97aa;
+  --accent:#6a9bff; --accent-soft:#18233f; --accent-fg:#0b0d12;
+  --live:#ff5a64; --chip:#1f2430; --bar:#1d2f5c; --sun:#ff7a7f; --sat:#7aa6ff;
+  --soop:#6a9bff; --chzzk:#1fe0a0; --twitch:#a970ff; --steam:#66c0f4;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.5}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 a:hover{color:var(--accent)}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:12px;padding:10px 16px;flex-wrap:wrap}
-.brand{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
-.brand i{width:10px;height:10px;border-radius:50%;background:var(--live);display:inline-block}
-.updated{margin-left:auto;color:var(--muted);font-size:12px}
-.shell{display:grid;grid-template-columns:200px minmax(0,1fr);max-width:1400px;margin:0 auto}
-nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 49px);align-self:start;padding:16px 8px 16px 16px;display:flex;flex-direction:column;gap:2px}
-nav a{padding:9px 12px;border-radius:8px;font-weight:500}
-nav a:hover{background:var(--chip);color:var(--fg)}
-nav .sub{margin:14px 12px 6px;font-size:12px;color:var(--muted);font-weight:700}
-nav .up{padding:6px 12px;font-size:12px;display:flex;flex-direction:column}
-nav .up b{font-weight:500}
-nav .up span{color:var(--muted)}
-main{padding:16px;display:flex;flex-direction:column;gap:20px;min-width:0}
-h2{font-size:17px;font-weight:800;margin:0;letter-spacing:-.02em}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:12px 20px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--twitch));display:grid;place-items:center}
+.mark::after{content:"";width:9px;height:9px;border-radius:50%;background:#fff}
+.updated{margin-left:auto;color:var(--muted);font-size:12px;display:flex;align-items:center;gap:7px;background:var(--chip);padding:5px 11px;border-radius:999px}
+.updated::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--live);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.updated::before{animation:none}html{scroll-behavior:auto}}
+.shell{display:grid;grid-template-columns:216px minmax(0,1fr);max-width:1440px;margin:0 auto}
+nav{position:sticky;top:57px;align-self:start;padding:20px 8px 20px 20px;display:flex;flex-direction:column;gap:2px}
+nav>a{padding:10px 12px;border-radius:10px;font-weight:700;display:flex;align-items:center;gap:10px}
+nav>a::before{content:"";width:8px;height:8px;border-radius:3px;background:var(--c,var(--muted))}
+nav>a:hover{background:var(--surface);color:var(--fg);box-shadow:var(--shadow)}
+nav .sub{margin:18px 12px 6px;font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+nav .up{padding:7px 12px;font-size:12px;display:flex;justify-content:space-between;gap:8px;border-radius:8px;cursor:pointer}
+nav .up:hover{background:var(--surface)}
+nav .up b{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+nav .up span{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;flex:none}
+main{padding:20px;display:flex;flex-direction:column;gap:28px;min-width:0}
+h2{font-size:20px;font-weight:800;margin:0;letter-spacing:-.03em}
+.sec{font-size:15px;display:flex;align-items:center;gap:8px;margin-top:6px}
+.sec::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--c,var(--accent))}
 .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .head .sp{flex:1}
-.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-weight:500}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:700;transition:.15s}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
-.cal{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
 .dow,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
-.dow div{padding:8px;font-size:12px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line)}
-.day{min-height:92px;padding:6px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:none;text-align:left;
-  display:flex;flex-direction:column;gap:3px;min-width:0}
+.dow div{padding:10px;font-size:12px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line);text-align:center}
+.dow div:first-child{color:var(--sun)}
+.dow div:last-child{color:var(--sat)}
+.day{min-height:100px;padding:7px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:none;text-align:left;
+  display:flex;flex-direction:column;gap:3px;min-width:0;transition:background .12s}
 .day:nth-child(7n){border-right:0}
-.day.out{opacity:.38}
+.day:nth-child(7n+1) .n{color:var(--sun)}
+.day:nth-child(7n) .n{color:var(--sat)}
+.day.out{opacity:.35}
 .day:hover{background:var(--chip)}
-.day .n{font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:5px}
-.day .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.day.today .n span{background:var(--accent);color:var(--accent-fg);border-radius:999px;padding:0 7px}
+.day .n{font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:5px;min-height:22px}
+.day .dot{width:6px;height:6px;border-radius:50%;background:var(--live)}
+.day.today .n span{background:var(--accent);color:var(--accent-fg);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;padding:0 6px}
 .day.sel{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
-.g{font-size:11px;line-height:1.3;background:var(--chip);border-radius:4px;padding:2px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.g{font-size:11px;line-height:1.35;background:var(--chip);border-radius:5px;padding:2px 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-weight:500}
 .g.kr{background:var(--accent-soft);color:var(--accent)}
 .more{font-size:11px;color:var(--muted)}
 .legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
 .legend span{display:inline-flex;align-items:center;gap:5px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:8px}
-.card h3{margin:0;font-size:14px;font-weight:800;display:flex;align-items:center;gap:6px}
-.card h3 small{font-weight:400;color:var(--muted);font-size:12px}
-.tag{font-size:10px;font-weight:800;background:var(--live);color:#fff;border-radius:3px;padding:1px 5px;letter-spacing:.04em}
-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:6px;align-items:baseline}
-li .r{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.card h3{margin:0;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.card h3 i{width:10px;height:10px;border-radius:50%;background:var(--c,var(--accent));flex:none}
+.card h3 small{font-weight:400;color:var(--muted);font-size:12px;margin-left:auto}
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;padding:3px 6px;border-radius:8px}
+li:hover{background:var(--chip)}
+li .r{font-weight:800;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:var(--chip)}
+li:nth-child(-n+3) .r{background:var(--c,var(--accent));color:#fff}
 li .t{overflow-wrap:anywhere;font-weight:500}
 li .s{display:block;color:var(--muted);font-size:12px;font-weight:400}
-li .v{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
-li.bar{position:relative;padding:3px 6px;border-radius:5px;overflow:hidden}
-li.bar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--bar);z-index:0}
+li .v{color:var(--fg);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+li.bar{position:relative;overflow:hidden}
+li.bar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--bar);z-index:0;border-radius:8px}
 li.bar>*{position:relative}
-.summary{background:var(--accent-soft);border-radius:12px;padding:12px 14px;white-space:pre-line}
-.empty{color:var(--muted);padding:18px;text-align:center;background:var(--surface);border:1px dashed var(--line);border-radius:12px}
+.summary{background:linear-gradient(135deg,var(--accent-soft),var(--surface));border:1px solid var(--line);border-radius:16px;padding:14px 16px;white-space:pre-line;font-weight:500}
+.empty{color:var(--muted);padding:22px;text-align:center;background:var(--surface);border:1px dashed var(--line);border-radius:16px}
+.none{color:var(--muted);font-size:12px}
 .rel{display:flex;flex-direction:column;gap:8px}
 .rel div{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
 .rel b{font-weight:700}
 .rel span{color:var(--muted);font-size:12px}
 @media (max-width:820px){
   .shell{grid-template-columns:minmax(0,1fr)}
-  nav{position:static;flex-direction:row;overflow-x:auto;padding:8px 16px 0}
-  nav a{white-space:nowrap}
-  nav .sub,nav .up{display:none}
-  .day{min-height:64px;padding:4px}
-  .g{font-size:10px;padding:1px 3px}
+  nav{position:static;flex-direction:row;overflow-x:auto;padding:10px 16px 0}
+  nav>a{white-space:nowrap}
+  nav .sub,nav #upcoming{display:none}
+  main{padding:16px}
+  .day{min-height:66px;padding:4px}
+  .g{font-size:10px;padding:1px 4px}
 }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="brand"><i></i>방송 트렌드 달력</div>
+  <div class="brand"><span class="mark"></span>방송 트렌드 달력</div>
   <div class="updated" id="updated">불러오는 중</div>
 </header>
 <div class="shell">
   <nav aria-label="메뉴">
-    <a href="#calendar">달력</a>
-    <a href="#soop">SOOP 트렌드</a>
+    <a href="#calendar" style="--c:var(--accent)">달력</a>
+    <a href="#soop" data-today style="--c:var(--soop)">SOOP 트렌드</a>
+    <a href="#games" data-today style="--c:var(--twitch)">게임 트렌드</a>
     <div class="sub">다가오는 신작</div>
     <div id="upcoming"></div>
   </nav>
   <main>
     <section id="calendar">
-      <div class="head" style="margin-bottom:10px">
+      <div class="head" style="margin-bottom:12px">
         <h2 id="ym"></h2><span class="sp"></span>
         <button class="btn" id="prev" aria-label="이전 달">‹</button>
         <button class="btn" id="todayBtn">오늘</button>
@@ -119,15 +143,15 @@ li.bar>*{position:relative}
         <div class="dow"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
         <div class="grid" id="grid"></div>
       </div>
-      <div class="legend" style="margin-top:8px">
-        <span><i class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block"></i>트렌드 기록 있음</span>
+      <div class="legend" style="margin-top:10px">
+        <span><i style="width:6px;height:6px;border-radius:50%;background:var(--live);display:inline-block"></i>트렌드 기록 있음</span>
         <span><i class="g kr" style="display:inline-block">국산</i>국내 게임사 신작</span>
         <span><i class="g" style="display:inline-block">해외</i>해외 신작</span>
       </div>
     </section>
     <section>
-      <div class="head" style="margin-bottom:10px"><h2 id="selTitle"></h2></div>
-      <div id="dayBody" style="display:flex;flex-direction:column;gap:14px"></div>
+      <div class="head" style="margin-bottom:12px"><h2 id="selTitle"></h2></div>
+      <div id="dayBody" style="display:flex;flex-direction:column;gap:16px"></div>
     </section>
   </main>
 </div>
@@ -171,12 +195,11 @@ let renderCal=function(){
   }
 };
 
-function listCard(title,sub,items,row,live){
-  const c=el('div','card');const h=el('h3');
-  if(live)h.append(el('span','tag','LIVE'));
-  h.append(document.createTextNode(title));if(sub)h.append(el('small','',sub));
+function listCard(title,sub,items,row,color){
+  const c=el('div','card');if(color)c.style.setProperty('--c','var(--'+color+')');
+  const h=el('h3');h.append(el('i'),document.createTextNode(title));if(sub)h.append(el('small','',sub));
   c.append(h);
-  if(!items.length){c.append(el('div','s','기록이 없습니다'));c.lastChild.style.color='var(--muted)';return c}
+  if(!items.length){c.append(el('div','none','기록이 없습니다'));return c}
   const ol=el('ol');items.forEach((it,i)=>ol.append(row(it,i)));c.append(ol);return c;
 }
 function row(i,title,sub,val,url,barW){
@@ -187,6 +210,7 @@ function row(i,title,sub,val,url,barW){
   if(sub)t.append(el('span','s',sub));
   li.append(t,el('span','v',val||''));return li;
 }
+function section(title,color,id){const h=el('h2','sec',title);h.id=id;h.style.setProperty('--c','var(--'+color+')');return h}
 
 function renderDay(){
   const [y,m,d]=state.sel.split('-').map(Number);
@@ -195,7 +219,7 @@ function renderDay(){
   const body=$('dayBody');body.replaceChildren();
   const gs=gamesOn(state.sel);
   if(gs.length){
-    const c=el('div','card');c.append(el('h3','','이날 출시되는 게임'));
+    const c=el('div','card');const h=el('h3');h.append(el('i'),document.createTextNode('이날 출시되는 게임'));c.append(h);
     const r=el('div','rel');
     gs.forEach(g=>{const row=el('div');row.append(el('b','',g.title));
       row.append(el('span','',[g.type,g.platforms,g.publisher].filter(Boolean).join(' · ')));
@@ -211,19 +235,28 @@ function renderDay(){
   }
   if(s.summary)body.append(el('div','summary',s.summary));
   const cats=arr(s.soopCategories),maxV=Math.max(1,...cats.map(c=>+c.viewers||0));
-  const soop=el('div','cards');soop.id='soop';
+  const soop=el('div','cards');
   soop.append(
-    listCard('SOOP 인기 카테고리','시청자 수',cats.slice(0,15),(c,i)=>row(i,c.name,'',num(c.viewers),null,Math.round((+c.viewers||0)/maxV*100)),true),
-    listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),true),
-    listCard('방송 제목 키워드',s.soopSample?'시청자 수 · 인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),true));
-  body.append(soop);
+    listCard('SOOP 인기 카테고리','시청자 수',cats.slice(0,15),(c,i)=>row(i,c.name,'',num(c.viewers),null,Math.round((+c.viewers||0)/maxV*100)),'soop'),
+    listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),'soop'),
+    listCard('방송 제목 키워드',s.soopSample?'인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),'soop'));
+  body.append(section('SOOP 트렌드','soop','soop'),soop);
+  const steam=(g,i,sub)=>row(i,g.name,sub,num(g.players)+'명',g.url);
+  const gm=el('div','cards');
+  gm.append(
+    listCard('치지직 인기 게임','시청자 수',arr(s.chzzk).slice(0,15),(c,i)=>row(i,c.name,c.count+'개 방송',num(c.viewers)+'명'),'chzzk'),
+    listCard('트위치 인기 게임','전 세계',arr(s.twitch).slice(0,15),(c,i)=>row(i,c.name,'',c.viewers?num(c.viewers)+'명':''),'twitch'),
+    listCard('스팀 급상승','지난주 대비 순위',arr(s.steamRising).slice(0,10),(g,i)=>steam(g,i,g.rank+'위 · '+(g.isNew?'100위권 새로 진입':g.gain+'계단 상승')),'steam'),
+    listCard('스팀 동시 접속','전 세계 · 오늘 최고',arr(s.steamTop).slice(0,15),(g,i)=>steam(g,i,''),'steam'),
+    listCard('스팀 최고 판매','한국',arr(s.steamSellers).slice(0,10),(g,i)=>row(i,g.name,'','',g.url),'steam'));
+  if(['chzzk','twitch','steamRising','steamTop','steamSellers'].some(k=>arr(s[k]).length))body.append(section('게임 트렌드','twitch','games'),gm);
 }
 
 function renderUpcoming(){
   const box=$('upcoming');box.replaceChildren();
-  state.games.filter(g=>g.date>=state.today).sort((a,b)=>a.date<b.date?-1:1).slice(0,8).forEach(g=>{
+  state.games.filter(g=>g.date>=state.today).sort((a,b)=>a.date<b.date?-1:1).slice(0,10).forEach(g=>{
     const a=el('a','up');a.href='#calendar';
-    a.append(el('b','',g.title),el('span','',g.date.slice(5).replace('-','/')));
+    a.append(el('b','',g.title),el('span','',g.date.slice(5).replace('-','/')));a.title=g.title;
     a.onclick=()=>{state.sel=g.date;[vy,vm]=g.date.split('-').map(Number);render()};
     box.append(a)});
 }
@@ -232,11 +265,15 @@ function renderUpdated(){
   $('updated').textContent=state.err||(t?'마지막 수집 '+new Date(t).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):state.ready?'오늘 수집 기록 없음':'불러오는 중');
 }
 function render(){renderCal();renderDay();renderUpcoming();renderUpdated()}
+function goToday(){state.today=kstToday();state.sel=state.today;[vy,vm]=state.today.split('-').map(Number);render()}
 
 $('prev').onclick=()=>{if(--vm<1){vm=12;vy--}renderCal()};
 $('next').onclick=()=>{if(++vm>12){vm=1;vy++}renderCal()};
-$('todayBtn').onclick=()=>{state.today=kstToday();state.sel=state.today;[vy,vm]=state.today.split('-').map(Number);render()};
+$('todayBtn').onclick=goToday;
 render();
+document.querySelectorAll('a[data-today]').forEach(a=>a.onclick=e=>{
+  e.preventDefault();goToday();$('calendar').scrollIntoView({block:'start'});
+});
 
 const loaded={};
 async function getJson(p){const r=await fetch(p+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(r.status);return r.json()}

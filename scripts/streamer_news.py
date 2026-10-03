@@ -12,6 +12,7 @@ LIVE = ("https://live.sooplive.co.kr/api/main_broad_list_api.php?selectType=acti
         "&selectValue=all&orderType=view_cnt&pageNo=%d&lang=ko_KR")
 PAGES = 6   # 한 쪽에 60명, 시청자 많은 순 (6쪽 = 상위 360명)
 DAYS = 5    # 최근 며칠 글까지
+MIN_READS = 500  # 조회수가 이보다 적은 글은 숨김
 KEEP = 80   # 저장할 글 수
 # 제목에 이 단어가 들어간 글만 보여 준다
 HOT = re.compile(r"신청|모집|발표|서버|참가|합격|대회|컨텐츠|콘텐츠|내전|선발|오디션|시참")
@@ -73,7 +74,7 @@ def main():
         for p in rows:
             date, title = p.get("reg_date") or "", (p.get("title_name") or "").strip()
             hit = HOT.search(title)
-            if date < since or not hit:
+            if date < since or not hit or num((p.get("count") or {}).get("read_cnt")) < MIN_READS:
                 continue
             posts.append({"id": uid, "nick": names[uid] or p.get("user_nick") or uid, "title": title[:100],
                           "body": re.sub(r"\s+", " ", p.get("content") or "")[:120], "date": date[:16],

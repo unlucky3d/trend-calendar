@@ -104,7 +104,6 @@ li.bar>*{position:relative}
   <nav aria-label="메뉴">
     <a href="#calendar">달력</a>
     <a href="#soop">SOOP 트렌드</a>
-    <a href="#korea">한국 트렌드</a>
     <div class="sub">다가오는 신작</div>
     <div id="upcoming"></div>
   </nav>
@@ -217,12 +216,7 @@ function renderDay(){
     listCard('SOOP 인기 카테고리','시청자 수',cats.slice(0,15),(c,i)=>row(i,c.name,'',num(c.viewers),null,Math.round((+c.viewers||0)/maxV*100)),true),
     listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),true),
     listCard('방송 제목 키워드',s.soopSample?'시청자 수 · 인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),true));
-  const kr=el('div','cards');kr.id='korea';
-  kr.append(
-    listCard('구글 급상승 검색어','한국',arr(s.google).slice(0,12),(g,i)=>row(i,g.title,g.headline,g.traffic,g.url)),
-    listCard('커뮤니티 인기글','',arr(s.community).slice(0,12),(n,i)=>row(i,n.title,n.source,'',n.url)),
-    listCard('유튜브 인기 급상승','한국',arr(s.youtube).slice(0,12),(n,i)=>row(i,n.title,n.channel,'',n.url)));
-  body.append(soop,kr);
+  body.append(soop);
 }
 
 function renderUpcoming(){

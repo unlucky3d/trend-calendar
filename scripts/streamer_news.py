@@ -10,7 +10,8 @@ LIVE = ("https://live.sooplive.co.kr/api/main_broad_list_api.php?selectType=acti
         "&selectValue=all&orderType=view_cnt&pageNo=1&lang=ko_KR")
 TOP = 40    # 지금 시청자 상위 몇 명까지 함께 볼지
 DAYS = 5    # 최근 며칠 글까지
-HOT = re.compile(r"모집|신청|참가|참여|합격|발표|대회|컨텐츠|콘텐츠|서버|일정|예고|시참|내전|선발|오디션|이벤트")
+# 제목에 이 단어가 들어간 글만 보여 준다
+HOT = re.compile(r"신청|모집|발표|서버|참가|합격|대회|컨텐츠|콘텐츠|내전|선발|오디션|시참")
 
 
 def get(url):
@@ -42,11 +43,12 @@ def main():
             continue
         for p in boards:
             date, title = p.get("reg_date") or "", (p.get("title_name") or "").strip()
-            if date < since or len(title) < 4:
+            hit = HOT.search(title)
+            if date < since or not hit:
                 continue
             body = re.sub(r"\s+", " ", p.get("content") or "")[:120]
             posts.append({"id": uid, "nick": name, "title": title[:100], "body": body, "date": date[:16], "reads": int((p.get("count") or {}).get("read_cnt") or 0),
-                          "hot": bool(HOT.search(title + " " + body)), "watched": uid in watched,
+                          "hot": True, "tag": hit.group(0), "watched": uid in watched,
                           "url": "https://ch.sooplive.co.kr/%s/post/%s" % (uid, p.get("title_no"))})
     if not posts and failed:
         print("FAIL streamer news: 방송국", failed, "곳 모두 실패")

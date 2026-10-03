@@ -275,7 +275,7 @@ $('next').onclick=()=>{if(++vm>12){vm=1;vy++}renderCal()};
 $('todayBtn').onclick=goToday;
 render();
 document.querySelectorAll('a[data-today]').forEach(a=>a.onclick=e=>{
-  e.preventDefault();goToday();$('calendar').scrollIntoView({block:'start'});
+  e.preventDefault();goToday();($(a.getAttribute('href').slice(1))||$('calendar')).scrollIntoView({block:'start'});
 });
 
 const loaded={};

@@ -10,12 +10,30 @@ WATCH = os.path.join(ROOT, "data", "streamers.json")
 PEAK = os.path.join(ROOT, "data", "streamer_peak.json")
 LIVE = ("https://live.sooplive.co.kr/api/main_broad_list_api.php?selectType=action"
         "&selectValue=all&orderType=view_cnt&pageNo=%d&lang=ko_KR")
+ROSTER = 800  # 방송을 꺼 둔 스트리머도 최고 시청자 순으로 이만큼까지 함께 확인
+PER = 3       # 한 스트리머당 보여 줄 글 수
 PAGES = 6   # 한 쪽에 60명, 시청자 많은 순 (6쪽 = 상위 360명)
 DAYS = 5    # 최근 며칠 글까지
 MIN_READS = 500  # 조회수가 이보다 적은 글은 숨김
 KEEP = 80   # 저장할 글 수
-# 제목에 이 단어가 들어간 글만 보여 준다
-HOT = re.compile(r"신청|모집|발표|서버|참가|합격|대회|컨텐츠|콘텐츠|내전|선발|오디션|시참")
+# 제목으로 글을 분류한다. 어디에도 안 걸리는 글과 "신청했다"류의 후기 글은 숨긴다
+APPLIED = re.compile(r"신청했|신청해|신청함|신청 ?완료|지원했|지원함|하고 ?싶|붙었|뽑혔|입주했|입주한|합격했")
+RULES = [
+    ("모집", re.compile(r"모집|신청자|신청 ?받|신청하신|신청하실|참가자|참여자|지원자|선발|오디션|입주 ?신청")),
+    ("발표", re.compile(r"합격|발표|명단|당첨")),
+    ("대회", re.compile(r"대회|내전|리그|토너먼트")),
+]
+TOPIC = re.compile(r"서버|컨텐츠|콘텐츠")
+NOTICE = re.compile(r"공지|안내|오픈|설명회|규칙|시즌|개최|예고")
+
+
+def classify(title):
+    if APPLIED.search(title):
+        return ""
+    for tag, rule in RULES:
+        if rule.search(title):
+            return tag
+    return "공지" if TOPIC.search(title) and NOTICE.search(title) else ""
 
 
 def get(url):
@@ -64,6 +82,8 @@ def main():
     peak = load(PEAK, {})
     for uid, v in live.items():
         peak[uid] = max(peak.get(uid, 0), v)
+    for uid in sorted(peak, key=peak.get, reverse=True)[:ROSTER]:  # 예전에 본 스트리머는 방송 중이 아니어도 확인
+        names.setdefault(uid, "")
     posts, failed = [], 0
     with ThreadPoolExecutor(8) as pool:
         results = list(pool.map(boards, list(names)))
@@ -73,12 +93,12 @@ def main():
             continue
         for p in rows:
             date, title = p.get("reg_date") or "", (p.get("title_name") or "").strip()
-            hit = HOT.search(title)
-            if date < since or not hit or num((p.get("count") or {}).get("read_cnt")) < MIN_READS:
+            tag = classify(title)
+            if date < since or not tag or num((p.get("count") or {}).get("read_cnt")) < MIN_READS:
                 continue
             posts.append({"id": uid, "nick": names[uid] or p.get("user_nick") or uid, "title": title[:100],
                           "body": re.sub(r"\s+", " ", p.get("content") or "")[:120], "date": date[:16],
-                          "reads": num((p.get("count") or {}).get("read_cnt")), "tag": hit.group(0),
+                          "reads": num((p.get("count") or {}).get("read_cnt")), "tag": tag,
                           "viewers": live.get(uid, 0), "peak": peak.get(uid, 0), "watched": uid in watched,
                           "url": "https://www.sooplive.com/station/%s/post/%s" % (uid, p.get("title_no"))})
     if not posts and failed:
@@ -88,6 +108,8 @@ def main():
     posts.sort(key=lambda p: (not (p["watched"] and not p["peak"]), -p["peak"], p["id"], -p["reads"]))
     seen = set()  # 같은 스트리머가 같은 제목으로 다시 올린 글은 조회수 높은 것만
     posts = [p for p in posts if not ((p["id"], p["title"]) in seen or seen.add((p["id"], p["title"])))]
+    per = {}
+    posts = [p for p in posts if per.setdefault(p["id"], []).append(1) or len(per[p["id"]]) <= PER]
     path = os.path.join(ROOT, "data", "snapshots", today[:7] + ".json")
     month = load(path, {})
     month.setdefault(today, {"date": today})["soopNews"] = posts[:KEEP]

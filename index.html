@@ -180,7 +180,7 @@ function cineOn(d){
     const on=w.start===d,off=w.end===d,mid=!!(w.start&&d>w.start&&(w.end?d<w.end:(w.live&&d<=state.today)));
     if(!on&&!off&&!mid)return;
     const per=(w.start?f(w.start)+(w.startTime?' '+w.startTime:''):'시작일 미상')+' ~ '+(w.end?f(w.end)+(w.endTime?' '+w.endTime:''):(w.live?'종료일 미정 (서비스 중)':'종료일 미확인'));
-    out.push({title:'시네티 '+w.title,label:'시네티 '+w.title+(on?' 시작':off?' 종료':''),cls:' cn'+(mid?' mid':''),mid,url:w.url,kind:[w.kind,per].filter(Boolean).join(' · '),time:''});
+    out.push({title:'시네티 '+w.title,label:'시네티 '+w.title+(on?' 시작':off?' 종료':''),cls:' cn'+(mid?' mid':''),mid,url:w.url,kind:[w.kind,per,w.replay?'다시보기 '+w.replay:''].filter(Boolean).join(' · '),time:''});
   });
   state.cine.events.filter(e=>e.date===d).forEach(e=>out.push({title:e.title,label:e.title,cls:' cn',url:e.url,kind:e.kind,time:e.time}));
   return out;
@@ -235,6 +235,7 @@ function renderDay(){
   const dow='일월화수목금토'[new Date(Date.UTC(y,m-1,d)).getUTCDay()];
   $('selTitle').textContent=m+'월 '+d+'일 ('+dow+')'+(state.sel===state.today?' · 오늘':'');
   const body=$('dayBody');body.replaceChildren();
+  if(state.cine.notice)body.append(el('div','empty',state.cine.notice));
   const cs=cineOn(state.sel);
   if(cs.length){
     const c=el('div','card');c.style.setProperty('--c','var(--twitch)');const h=el('h3');h.append(el('i'),document.createTextNode('이날 시네티 같이보기'));c.append(h);
@@ -326,7 +327,7 @@ async function loadMonth(y,m,force){
 async function loadGames(){
   try{const g=await getJson('data/games.json');state.games=(Array.isArray(g)?g:[]).filter(x=>x&&typeof x.date==='string'&&x.title);state.err=''}
   catch(e){state.err='출시 일정을 불러오지 못했습니다'}
-  try{const c=await getJson('data/cinety.json');state.cine={works:arr(c&&c.works),events:arr(c&&c.events)}}catch(e){}
+  try{const c=await getJson('data/cinety.json');state.cine={works:arr(c&&c.works),events:arr(c&&c.events),notice:(c&&c.notice)||''}}catch(e){}
   render();
 }
 const _rc=renderCal;renderCal=function(){_rc();loadMonth(vy,vm)};

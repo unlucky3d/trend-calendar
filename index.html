@@ -177,10 +177,10 @@ function cineOn(d){
   const f=s=>s?(+s.slice(5,7))+'/'+(+s.slice(8,10)):'';
   const out=[];
   state.cine.works.forEach(w=>{
-    const on=w.start===d,off=w.end===d,mid=!!(w.start&&w.end&&d>w.start&&d<w.end);
+    const on=w.start===d,off=w.end===d,mid=!!(w.start&&d>w.start&&(w.end?d<w.end:(w.live&&d<=state.today)));
     if(!on&&!off&&!mid)return;
-    const per=(w.start?f(w.start)+(w.startTime?' '+w.startTime:''):'시작일 미상')+' ~ '+(w.end?f(w.end)+(w.endTime?' '+w.endTime:''):'종료일 미정');
-    out.push({title:'시네티 '+w.title,label:'시네티 '+w.title+(on?' 시작':off?' 종료':''),cls:' cn'+(mid?' mid':''),url:w.url,kind:[w.kind,per].filter(Boolean).join(' · '),time:''});
+    const per=(w.start?f(w.start)+(w.startTime?' '+w.startTime:''):'시작일 미상')+' ~ '+(w.end?f(w.end)+(w.endTime?' '+w.endTime:''):(w.live?'종료일 미정 (서비스 중)':'종료일 미확인'));
+    out.push({title:'시네티 '+w.title,label:'시네티 '+w.title+(on?' 시작':off?' 종료':''),cls:' cn'+(mid?' mid':''),mid,url:w.url,kind:[w.kind,per].filter(Boolean).join(' · '),time:''});
   });
   state.cine.events.filter(e=>e.date===d).forEach(e=>out.push({title:e.title,label:e.title,cls:' cn',url:e.url,kind:e.kind,time:e.time}));
   return out;
@@ -203,7 +203,8 @@ let renderCal=function(){
     const n=el('div','n');n.append(el('span','',d.getUTCDate()));
     if(state.snaps[key])n.append(el('i','dot'));
     b.append(n);
-    const gs=[...cineOn(key).map(c=>({title:c.label,cls:c.cls})),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''}))];
+    const cs=cineOn(key).map(c=>({title:c.label,cls:c.cls,mid:c.mid}));
+    const gs=[...cs.filter(c=>!c.mid),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''})),...cs.filter(c=>c.mid)];
     gs.slice(0,3).forEach(g=>{const c=el('div','g'+g.cls,g.title);c.title=g.title;b.append(c)});
     if(gs.length>3)b.append(el('div','more','+'+(gs.length-3)+'개'));
     b.setAttribute('aria-label',key+(gs.length?' 일정 '+gs.length+'개':''));

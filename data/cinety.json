@@ -64,52 +64,101 @@
   {
    "title": "악마를 보았다",
    "start": "2026-09-21",
-   "startTime": "저녁 7시",
+   "startTime": "19시",
    "end": "2026-10-05",
-   "endTime": "오후 3시",
+   "endTime": "15시",
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/207730659",
+   "replay": "가능",
    "live": true
   },
   {
    "title": "응답하라 1994",
    "start": "2026-09-23",
-   "startTime": "오후 3시",
-   "end": "",
-   "endTime": "",
+   "startTime": "15시",
+   "end": "2026-10-23",
+   "endTime": "12시",
    "kind": "드라마",
    "url": "https://cinety.sooplive.com/board/notice/207346647",
+   "replay": "불가능",
    "live": true
   },
   {
    "title": "킬러의 보디가드",
    "start": "2026-09-25",
-   "startTime": "저녁 6시",
-   "end": "",
-   "endTime": "",
+   "startTime": "18시",
+   "end": "2026-10-09",
+   "endTime": "15시",
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/207346663",
+   "replay": "불가능",
    "live": true
   },
   {
    "title": "해적: 바다로 간 산적",
    "start": "2026-09-30",
-   "startTime": "저녁 6시",
-   "end": "",
-   "endTime": "",
+   "startTime": "18시",
+   "end": "2026-10-14",
+   "endTime": "15시",
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/208498263",
+   "replay": "불가능",
    "live": true
   },
   {
    "title": "황해",
    "start": "2026-10-02",
-   "startTime": "저녁 6시",
-   "end": "",
-   "endTime": "",
+   "startTime": "18시",
+   "end": "2026-10-16",
+   "endTime": "15시",
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/208690191",
+   "replay": "가능",
    "live": true
+  },
+  {
+   "title": "더 울프 오브 월 스트리트",
+   "start": "2026-10-06",
+   "startTime": "18시",
+   "end": "2026-10-20",
+   "endTime": "15시",
+   "kind": "",
+   "url": "",
+   "replay": "불가능",
+   "live": false
+  },
+  {
+   "title": "원펀맨 1기",
+   "start": "2026-10-08",
+   "startTime": "15시",
+   "end": "2026-11-08",
+   "endTime": "12시",
+   "kind": "",
+   "url": "",
+   "replay": "불가능",
+   "live": false
+  },
+  {
+   "title": "수상한 그녀",
+   "start": "2026-10-12",
+   "startTime": "18시",
+   "end": "2026-10-26",
+   "endTime": "15시",
+   "kind": "",
+   "url": "",
+   "replay": "불가능",
+   "live": false
+  },
+  {
+   "title": "템빨 ~아이템의 힘~",
+   "start": "2026-10-17",
+   "startTime": "15시",
+   "end": "2026-10-21",
+   "endTime": "12시",
+   "kind": "",
+   "url": "",
+   "replay": "불가능",
+   "live": false
   }
  ],
  "events": [
@@ -130,6 +179,7 @@
    "url": "https://cinety.sooplive.com/board/notice/208672851"
   }
  ],
+ "notice": "",
  "debug": {
   "sections": [
    "💗너를 너무너무너무너무 좋아하는 100명의 그녀",
@@ -158,6 +208,10 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 14
+  "free": 14,
+  "schedule": [
+   "[공지] 같이보기 콘텐츠 일정 정리 (9월)",
+   "19851789987821100.png"
+  ]
  }
 }

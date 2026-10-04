@@ -151,7 +151,7 @@ li.bar>*{position:relative}
         <span><i style="width:6px;height:6px;border-radius:50%;background:var(--live);display:inline-block"></i>트렌드 기록 있음</span>
         <span><i class="g kr" style="display:inline-block">국산</i>국내 게임사 신작</span>
         <span><i class="g" style="display:inline-block">해외</i>해외 신작</span>
-        <span><i class="g cn" style="display:inline-block">시네티</i>SOOP 시네티 (연한 색은 서비스 기간 중)</span>
+        <span><i class="g cn" style="display:inline-block">시네티</i>SOOP 시네티 시작/종료</span>
       </div>
     </section>
     <section>
@@ -204,7 +204,7 @@ let renderCal=function(){
     if(state.snaps[key])n.append(el('i','dot'));
     b.append(n);
     const cs=cineOn(key).map(c=>({title:c.label,cls:c.cls,mid:c.mid}));
-    const gs=[...cs.filter(c=>!c.mid),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''})),...cs.filter(c=>c.mid)];
+    const gs=[...cs.filter(c=>!c.mid),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''}))];
     gs.slice(0,3).forEach(g=>{const c=el('div','g'+g.cls,g.title);c.title=g.title;b.append(c)});
     if(gs.length>3)b.append(el('div','more','+'+(gs.length-3)+'개'));
     b.setAttribute('aria-label',key+(gs.length?' 일정 '+gs.length+'개':''));

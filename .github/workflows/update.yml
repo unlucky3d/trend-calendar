@@ -1,7 +1,7 @@
 name: 트렌드 수집
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "7,27,47 * * * *"   # GitHub가 예약 실행을 자주 건너뛰어서 한 시간에 세 번 시도
   workflow_dispatch:
 permissions:
   contents: write
@@ -13,19 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python scripts/collect.py
-      - run: python scripts/keywords.py
-      - run: python scripts/games_trend.py
-      - run: python scripts/streamer_news.py || true
-      - run: python scripts/food_news.py || true
-      - run: python scripts/cinety.py || true
+      - run: python3 scripts/collect.py
+      - run: python3 scripts/keywords.py
+      - run: python3 scripts/games_trend.py
+      - run: python3 scripts/streamer_news.py || true
+      - run: python3 scripts/food_news.py || true
+      - run: python3 scripts/cinety.py || true
       - name: 변경 사항 저장
         run: |
           git config user.name "trend-bot"
           git config user.email "trend-bot@users.noreply.github.com"
           git add data
           git diff --cached --quiet || git commit -m "트렌드 갱신 $(TZ=Asia/Seoul date '+%m/%d %H:%M')"
+          git pull --rebase -q || true
           git push

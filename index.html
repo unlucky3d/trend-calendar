@@ -132,7 +132,7 @@ li.bar>*{position:relative}
     <a href="#soop" data-today style="--c:var(--soop)">SOOP 트렌드</a>
     <a href="#games" data-today style="--c:var(--twitch)">게임 트렌드</a>
     <a href="#food" data-today style="--c:var(--chzzk)">신메뉴</a>
-    <div class="sub">다가오는 신작</div>
+    <div class="sub">다가오는 일정</div>
     <div id="upcoming"></div>
   </nav>
   <main>
@@ -238,7 +238,7 @@ function renderDay(){
   if(state.cine.notice)body.append(el('div','empty',state.cine.notice));
   const cs=cineOn(state.sel);
   if(cs.length){
-    const c=el('div','card');c.style.setProperty('--c','var(--twitch)');const h=el('h3');h.append(el('i'),document.createTextNode('이날 시네티 같이보기'));c.append(h);
+    const c=el('div','card');c.style.setProperty('--c','var(--twitch)');const h=el('h3');h.append(el('i'),document.createTextNode('이날 볼 수 있는 시네티'));c.append(h);
     const r=el('div','rel');
     cs.forEach(x=>{const row=el('div');const u=safeUrl(x.url);const t=el(u?'a':'b','',x.title);if(u){t.href=u;t.target='_blank';t.rel='noopener';t.style.fontWeight='700'}
       row.append(t,el('span','',[x.kind,x.time].filter(Boolean).join(' · ')));r.append(row)});
@@ -283,7 +283,7 @@ function renderDay(){
     listCard('치지직 인기 게임','시청자 수',arr(s.chzzk).slice(0,15),(c,i)=>row(i,c.name,c.count+'개 방송',num(c.viewers)+'명'),'chzzk'),
     listCard('트위치 인기 게임','전 세계',arr(s.twitch).slice(0,15),(c,i)=>row(i,c.name,'',c.viewers?num(c.viewers)+'명':''),'twitch'),
     listCard('스팀 급상승','지난주 대비 순위',arr(s.steamRising).slice(0,10),(g,i)=>steam(g,i,g.rank+'위 · '+(g.isNew?'100위권 새로 진입':g.gain+'계단 상승')),'steam'),
-    listCard('스팀 동시 접속','전 세계 · 오늘 최고',arr(s.steamTop).slice(0,15),(g,i)=>steam(g,i,''),'steam'),
+    listCard('스팀 동시 접속','전 세계 · 오늘 최고',arr(s.steamTop).slice().sort((a,b)=>(b.players||0)-(a.players||0)).slice(0,15),(g,i)=>steam(g,i,''),'steam'),
     listCard('스팀 최고 판매','한국',arr(s.steamSellers).slice(0,10),(g,i)=>row(i,g.name,'','',g.url),'steam'));
   if(['chzzk','twitch','steamRising','steamTop','steamSellers'].some(k=>arr(s[k]).length))body.append(section('게임 트렌드','twitch','games'),gm);
   const fd=s.food||{};
@@ -296,9 +296,9 @@ function renderDay(){
 
 function renderUpcoming(){
   const box=$('upcoming');box.replaceChildren();
-  state.games.filter(g=>g.date>=state.today).sort((a,b)=>a.date<b.date?-1:1).slice(0,10).forEach(g=>{
+  [...state.games,...state.cine.works.filter(w=>w.start).map(w=>({title:'시네티 '+w.title,date:w.start,cn:1}))].filter(g=>g.date>=state.today).sort((a,b)=>a.date<b.date?-1:1).slice(0,10).forEach(g=>{
     const a=el('a','up');a.href='#calendar';
-    a.append(el('b','',g.title),el('span','',g.date.slice(5).replace('-','/')));a.title=g.title;
+    a.append(el('b','',g.title),el('span','',g.date.slice(5).replace('-','/')));a.title=g.title;if(g.cn)a.firstChild.style.color='var(--twitch)';
     a.onclick=()=>{state.sel=g.date;[vy,vm]=g.date.split('-').map(Number);render()};
     box.append(a)});
 }

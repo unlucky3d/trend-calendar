@@ -1,0 +1,15 @@
+{
+ "source": "19851789987821100.png",
+ "label": "9월 같이보기 일정",
+ "works": [
+  {"title":"악마를 보았다","start":"2026-09-21","startTime":"19시","end":"2026-10-05","endTime":"15시","replay":"가능"},
+  {"title":"응답하라 1994","start":"2026-09-23","startTime":"15시","end":"2026-10-23","endTime":"12시","replay":"불가능"},
+  {"title":"킬러의 보디가드","start":"2026-09-25","startTime":"18시","end":"2026-10-09","endTime":"15시","replay":"불가능"},
+  {"title":"해적: 바다로 간 산적","start":"2026-09-30","startTime":"18시","end":"2026-10-14","endTime":"15시","replay":"불가능"},
+  {"title":"황해","start":"2026-10-02","startTime":"18시","end":"2026-10-16","endTime":"15시","replay":"가능"},
+  {"title":"더 울프 오브 월 스트리트","start":"2026-10-06","startTime":"18시","end":"2026-10-20","endTime":"15시","replay":"불가능"},
+  {"title":"원펀맨 1기","start":"2026-10-08","startTime":"15시","end":"2026-11-08","endTime":"12시","replay":"불가능"},
+  {"title":"수상한 그녀","start":"2026-10-12","startTime":"18시","end":"2026-10-26","endTime":"15시","replay":"불가능"},
+  {"title":"템빨 ~아이템의 힘~","start":"2026-10-17","startTime":"15시","end":"2026-10-21","endTime":"12시","replay":"불가능"}
+ ]
+}

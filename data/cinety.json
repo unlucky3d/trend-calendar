@@ -1,65 +1,122 @@
-[
- {
-  "id": "207730659",
-  "date": "2026-09-21",
-  "title": "시네티 악마를 보았다",
-  "kind": "오픈",
-  "time": "저녁 7시",
-  "note": "[공지] 9/21(월) 저녁 7시 영화 <악마를 보았다> 오픈!",
-  "url": "https://cinety.sooplive.com/board/notice/207730659"
- },
- {
-  "id": "207809199",
-  "date": "2026-09-22",
-  "title": "시네티 9/22(화) 아리랑TV,  SOOP에서 만나세요!",
-  "kind": "오픈",
-  "time": "",
-  "note": "[공지] 9/22(화) 아리랑TV,  SOOP에서 만나세요!",
-  "url": "https://cinety.sooplive.com/board/notice/207809199"
- },
- {
-  "id": "207346647",
-  "date": "2026-09-23",
-  "title": "시네티 응답하라 1994",
-  "kind": "오픈",
-  "time": "오후 3시",
-  "note": "[공지] 9/23(수) 오후 3시 드라마 <응답하라 1994> 오픈!",
-  "url": "https://cinety.sooplive.com/board/notice/207346647"
- },
- {
-  "id": "207346663",
-  "date": "2026-09-25",
-  "title": "시네티 킬러의 보디가드",
-  "kind": "오픈",
-  "time": "저녁 6시",
-  "note": "[공지] 9/25(금) 저녁 6시 영화 <킬러의 보디가드> 오픈!",
-  "url": "https://cinety.sooplive.com/board/notice/207346663"
- },
- {
-  "id": "208498263",
-  "date": "2026-09-30",
-  "title": "시네티 해적: 바다로 간 산적",
-  "kind": "오픈",
-  "time": "저녁 6시",
-  "note": "[공지] 9/30(수) 저녁 6시 영화 <해적: 바다로 간 산적> 오픈!",
-  "url": "https://cinety.sooplive.com/board/notice/208498263"
- },
- {
-  "id": "208690191",
-  "date": "2026-10-02",
-  "title": "시네티 황해",
-  "kind": "오픈",
-  "time": "저녁 6시",
-  "note": "[공지] 10/2(금) 저녁 6시 영화 <황해> 오픈!",
-  "url": "https://cinety.sooplive.com/board/notice/208690191"
- },
- {
-  "id": "208672851",
-  "date": "2026-10-07",
-  "title": "시네티 누리호 5차 발사",
-  "kind": "같이보기",
-  "time": "",
-  "note": "[공지] 10/7(수) <누리호 5차 발사> 같이보기 안내",
-  "url": "https://cinety.sooplive.com/board/notice/208672851"
- }
-]
+{
+ "updated": "2026-10-05",
+ "works": [
+  {
+   "title": "은혼",
+   "start": "2026-06-05",
+   "startTime": "저녁 6시",
+   "end": "2026-09-10",
+   "endTime": "오후 3시",
+   "kind": "애니메이션",
+   "url": "https://cinety.sooplive.com/board/notice/197803227"
+  },
+  {
+   "title": "보이스",
+   "start": "2026-06-08",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "드라마",
+   "url": "https://cinety.sooplive.com/board/notice/198090031"
+  },
+  {
+   "title": "써니",
+   "start": "2026-06-10",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/198270141"
+  },
+  {
+   "title": "손 the guest",
+   "start": "2026-07-22",
+   "startTime": "저녁 6시",
+   "end": "2026-08-21",
+   "endTime": "오후 3시",
+   "kind": "드라마",
+   "url": "https://cinety.sooplive.com/board/notice/202171235"
+  },
+  {
+   "title": "명량",
+   "start": "2026-07-24",
+   "startTime": "저녁 6시",
+   "end": "2026-08-07",
+   "endTime": "오후 3시",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/202346649"
+  },
+  {
+   "title": "나의 히어로 아카데미아 5-6기",
+   "start": "2026-08-10",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "애니메이션",
+   "url": "https://cinety.sooplive.com/board/notice/203922875"
+  },
+  {
+   "title": "악마를 보았다",
+   "start": "2026-09-21",
+   "startTime": "저녁 7시",
+   "end": "2026-10-05",
+   "endTime": "오후 3시",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/207730659"
+  },
+  {
+   "title": "응답하라 1994",
+   "start": "2026-09-23",
+   "startTime": "오후 3시",
+   "end": "",
+   "endTime": "",
+   "kind": "드라마",
+   "url": "https://cinety.sooplive.com/board/notice/207346647"
+  },
+  {
+   "title": "킬러의 보디가드",
+   "start": "2026-09-25",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/207346663"
+  },
+  {
+   "title": "해적: 바다로 간 산적",
+   "start": "2026-09-30",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/208498263"
+  },
+  {
+   "title": "황해",
+   "start": "2026-10-02",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/208690191"
+  }
+ ],
+ "events": [
+  {
+   "id": "207809199",
+   "date": "2026-09-22",
+   "title": "시네티 9/22(화) 아리랑TV,  SOOP에서 만나세요!",
+   "kind": "안내",
+   "time": "",
+   "url": "https://cinety.sooplive.com/board/notice/207809199"
+  },
+  {
+   "id": "208672851",
+   "date": "2026-10-07",
+   "title": "시네티 누리호 5차 발사",
+   "kind": "같이보기",
+   "time": "",
+   "url": "https://cinety.sooplive.com/board/notice/208672851"
+  }
+ ]
+}

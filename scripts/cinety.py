@@ -6,6 +6,8 @@ from datetime import datetime, timedelta, timezone
 KST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STORE = os.path.join(ROOT, "data", "cinety.json")
+MANUAL = os.path.join(ROOT, "data", "cinety_manual.json")   # 월간 일정표 이미지를 읽어 적어 둔 파일
+SCHEDULE = "https://api-channel.sooplive.com/v1.2/channel/aforiginal/post/196442267"
 BOARD = ("https://api-channel.sooplive.com/v1.2/channel/aforiginal/board?page=%d&bbsNo=94915546"
          "&perPage=20&field=title,contents&keyword=&type=all")
 MAIN = "https://cinety.sooplive.com/api/api.php?type=get_main"
@@ -51,7 +53,7 @@ def text_end(text):
     return "%s-%02d-%02d" % (m.group(1), int(m.group(2)), int(m.group(3))), t.group(0) if t else ""
 
 
-def build(posts, free, now):
+def build(posts, free, now, manual=None):
     works, events = {}, {}
 
     def work(title):
@@ -86,6 +88,12 @@ def build(posts, free, now):
         if not title or not start or re.search(r"예고편|하이라이트", title) or norm(title) in works:
             continue
         work(title).update(start=start, url="https://cinety.sooplive.com/content/detail/%s" % f.get("no"))
+    for m in (manual or {}).get("works") or []:   # 월간 일정표(이미지)에 적힌 기간이 공지보다 우선
+        w = work(m["title"])
+        w.update(start=m.get("start") or w["start"], startTime=m.get("startTime") or w["startTime"],
+                 replay=m.get("replay") or "")
+        if (m.get("end") or "") >= w["end"]:
+            w["end"], w["endTime"] = m.get("end") or "", m.get("endTime") or ""
     today = now.strftime("%Y-%m-%d")
     old = (now - timedelta(days=60)).strftime("%Y-%m-%d")
     older = (now - timedelta(days=120)).strftime("%Y-%m-%d")
@@ -133,7 +141,18 @@ def main():
         debug["error"] = repr(e)[:200]
         print("FAIL cinety main", repr(e)[:200])
     debug["free"] = len(free)
-    out = build(posts, free, now)
+    manual = json.load(open(MANUAL, encoding="utf-8")) if os.path.exists(MANUAL) else {}
+    notice = ""
+    try:
+        post = get(SCHEDULE)
+        image = ((post.get("photos") or [{}])[0]).get("fileName") or ""
+        debug["schedule"] = [post.get("titleName"), image]
+        if image and manual.get("source") and image != manual["source"]:
+            notice = "시네티 월간 일정표가 새로 올라왔습니다 (%s). 달력의 시네티 기간은 이전 일정표 기준입니다." % (post.get("titleName") or "")
+    except Exception as e:
+        debug["scheduleError"] = repr(e)[:200]
+    out = build(posts, free, now, manual)
+    out["notice"] = notice
     out["debug"] = debug
     json.dump(out, open(STORE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("OK   cinety 공지", len(posts), "작품", len(out["works"]), "일정", len(out["events"]))

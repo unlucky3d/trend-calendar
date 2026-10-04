@@ -81,6 +81,7 @@ h2{font-size:20px;font-weight:800;margin:0;letter-spacing:-.03em}
 .g{font-size:11px;line-height:1.35;background:var(--chip);border-radius:5px;padding:2px 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-weight:500}
 .g.kr{background:var(--accent-soft);color:var(--accent)}
 .g.cn{background:color-mix(in srgb,var(--twitch) 18%,transparent);color:var(--twitch)}
+.g.cn.mid{opacity:.55}
 .more{font-size:11px;color:var(--muted)}
 .legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
 .legend span{display:inline-flex;align-items:center;gap:5px}
@@ -150,7 +151,7 @@ li.bar>*{position:relative}
         <span><i style="width:6px;height:6px;border-radius:50%;background:var(--live);display:inline-block"></i>트렌드 기록 있음</span>
         <span><i class="g kr" style="display:inline-block">국산</i>국내 게임사 신작</span>
         <span><i class="g" style="display:inline-block">해외</i>해외 신작</span>
-        <span><i class="g cn" style="display:inline-block">시네티</i>SOOP 시네티 같이보기</span>
+        <span><i class="g cn" style="display:inline-block">시네티</i>SOOP 시네티 (연한 색은 서비스 기간 중)</span>
       </div>
     </section>
     <section>
@@ -165,14 +166,25 @@ const $=id=>document.getElementById(id);
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const pad=n=>String(n).padStart(2,'0');
 const kstToday=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul'}).format(new Date());
-const state={today:kstToday(),sel:kstToday(),games:[],cine:[],snaps:{},ready:false,err:''};
+const state={today:kstToday(),sel:kstToday(),games:[],cine:{works:[],events:[]},snaps:{},ready:false,err:''};
 let [vy,vm]=state.today.split('-').map(Number);
 const num=n=>typeof n==='number'?n.toLocaleString('ko-KR'):(n||'');
 const safeUrl=u=>typeof u==='string'&&/^https:\/\//.test(u)?u:null;
 const arr=x=>Array.isArray(x)?x:[];
 
 function gamesOn(d){return state.games.filter(g=>g.date===d)}
-function cineOn(d){return state.cine.filter(c=>c.date===d)}
+function cineOn(d){
+  const f=s=>s?(+s.slice(5,7))+'/'+(+s.slice(8,10)):'';
+  const out=[];
+  state.cine.works.forEach(w=>{
+    const on=w.start===d,off=w.end===d,mid=!!(w.start&&w.end&&d>w.start&&d<w.end);
+    if(!on&&!off&&!mid)return;
+    const per=(w.start?f(w.start)+(w.startTime?' '+w.startTime:''):'시작일 미상')+' ~ '+(w.end?f(w.end)+(w.endTime?' '+w.endTime:''):'종료일 미정');
+    out.push({title:'시네티 '+w.title,label:'시네티 '+w.title+(on?' 시작':off?' 종료':''),cls:' cn'+(mid?' mid':''),url:w.url,kind:[w.kind,per].filter(Boolean).join(' · '),time:''});
+  });
+  state.cine.events.filter(e=>e.date===d).forEach(e=>out.push({title:e.title,label:e.title,cls:' cn',url:e.url,kind:e.kind,time:e.time}));
+  return out;
+}
 
 let renderCal=function(){
   $('ym').textContent=vy+'년 '+vm+'월';
@@ -191,7 +203,7 @@ let renderCal=function(){
     const n=el('div','n');n.append(el('span','',d.getUTCDate()));
     if(state.snaps[key])n.append(el('i','dot'));
     b.append(n);
-    const gs=[...cineOn(key).map(c=>({title:c.title+(c.kind==='서비스 종료'?' 종료':''),cls:' cn'})),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''}))];
+    const gs=[...cineOn(key).map(c=>({title:c.label,cls:c.cls})),...gamesOn(key).map(g=>({title:g.title,cls:g.korean?' kr':''}))];
     gs.slice(0,3).forEach(g=>{const c=el('div','g'+g.cls,g.title);c.title=g.title;b.append(c)});
     if(gs.length>3)b.append(el('div','more','+'+(gs.length-3)+'개'));
     b.setAttribute('aria-label',key+(gs.length?' 일정 '+gs.length+'개':''));
@@ -313,7 +325,7 @@ async function loadMonth(y,m,force){
 async function loadGames(){
   try{const g=await getJson('data/games.json');state.games=(Array.isArray(g)?g:[]).filter(x=>x&&typeof x.date==='string'&&x.title);state.err=''}
   catch(e){state.err='출시 일정을 불러오지 못했습니다'}
-  try{const c=await getJson('data/cinety.json');state.cine=(Array.isArray(c)?c:[]).filter(x=>x&&typeof x.date==='string'&&x.title)}catch(e){}
+  try{const c=await getJson('data/cinety.json');state.cine={works:arr(c&&c.works),events:arr(c&&c.events)}}catch(e){}
   render();
 }
 const _rc=renderCal;renderCal=function(){_rc();loadMonth(vy,vm)};

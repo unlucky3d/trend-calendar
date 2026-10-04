@@ -15,20 +15,23 @@ PER = 3       # 한 스트리머당 보여 줄 글 수
 PAGES = 6   # 한 쪽에 60명, 시청자 많은 순 (6쪽 = 상위 360명)
 DAYS = 5    # 최근 며칠 글까지
 MIN_READS = 500  # 조회수가 이보다 적은 글은 숨김
+MIN_RECRUIT = 100  # 모집 글은 이 조회수부터 보여 준다
 KEEP = 80   # 저장할 글 수
-# 제목으로 글을 분류한다. 어디에도 안 걸리는 글과 "신청했다"류의 후기 글은 숨긴다
-APPLIED = re.compile(r"신청했|신청해|신청함|신청 ?완료|지원했|지원함|하고 ?싶|붙었|뽑혔|입주했|입주한|합격했")
+# 제목으로 글을 분류한다. 어디에도 안 걸리는 글, "신청했다"류의 후기 글, 벌칙·방셀·채용 공지는 숨긴다
+APPLIED = re.compile(r"신청했|신청해|신청함|신청 ?완료|지원했|지원함|참가했|참여했|하고 ?싶|붙었|뽑혔|입주했|입주한|합격했|떨어졌|탈락했")
+SKIP = re.compile(r"편집자|매니저|디자이너|썸네일|PM ?모집|팝니다|삽니다|갖고 ?계신|방셀|리캡|휴방|생방 ?공지|방송 ?공지|벌칙|API|하실 ?분들은", re.I)
 RULES = [
-    ("모집", re.compile(r"모집|신청자|신청 ?받|신청하신|신청하실|참가자|참여자|지원자|선발|오디션|입주 ?신청")),
-    ("발표", re.compile(r"합격|발표|명단|당첨")),
-    ("대회", re.compile(r"대회|내전|리그|토너먼트")),
+    ("모집", re.compile(r"모집|공모|신청자|신청 ?받|신청하신|신청하실|신청 ?방법|신청 ?양식|신청서|참가 ?신청|입주 ?신청|참가자|참여자|지원자|입주자"
+                      r"|선발|오디션|구합니다|구해요|구함|구인|구해봅|하실 ?분|오실 ?분|함께하실|같이 ?하실|참여하실|참가하실|접수|선착순")),
+    ("발표", re.compile(r"합격|명단|당첨|라인업|(결과|참가자|입주자|멤버|대진|팀) ?발표")),
+    ("대회", re.compile(r"대회|내전|리그|토너먼트|멸망전|예선|본선|결승|대진|조추첨|드래프트|팀 ?경매")),
 ]
-TOPIC = re.compile(r"서버|컨텐츠|콘텐츠")
-NOTICE = re.compile(r"공지|안내|오픈|설명회|규칙|시즌|개최|예고")
+TOPIC = re.compile(r"서버|컨텐츠|콘텐츠|프로젝트")
+NOTICE = re.compile(r"공지|안내|오픈|설명회|규칙|시즌 ?\d|개최|예고|입주")
 
 
 def classify(title):
-    if APPLIED.search(title):
+    if APPLIED.search(title) or SKIP.search(title):
         return ""
     for tag, rule in RULES:
         if rule.search(title):
@@ -94,7 +97,7 @@ def main():
         for p in rows:
             date, title = p.get("reg_date") or "", (p.get("title_name") or "").strip()
             tag = classify(title)
-            if date < since or not tag or num((p.get("count") or {}).get("read_cnt")) < MIN_READS:
+            if date < since or not tag or num((p.get("count") or {}).get("read_cnt")) < (MIN_RECRUIT if tag == "모집" else MIN_READS):
                 continue
             posts.append({"id": uid, "nick": names[uid] or p.get("user_nick") or uid, "title": title[:100],
                           "body": re.sub(r"\s+", " ", p.get("content") or "")[:120], "date": date[:16],

@@ -91,7 +91,9 @@ def build(posts, free, now):
     older = (now - timedelta(days=120)).strftime("%Y-%m-%d")
     keep = [w for w in works.values()
             if (w["end"] and w["end"] >= old) or (not w["end"] and w["start"] >= older)]
+    live = {norm(f.get("title") or "") for f in free}   # 지금 시청 목록에 있는 작품
     for w in keep:
+        w["live"] = norm(w["title"]) in live
         if w["end"] and w["start"] and w["end"] < w["start"]:
             w["end"], w["endTime"] = "", ""   # 재오픈 등으로 순서가 뒤집힌 경우 종료일은 버린다
     keep.sort(key=lambda w: (w["start"] or w["end"], w["title"]))

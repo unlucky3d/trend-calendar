@@ -303,8 +303,13 @@ function renderUpcoming(){
     box.append(a)});
 }
 function renderUpdated(){
-  const t=state.snaps[state.today]?.updatedAt;
-  $('updated').textContent=state.err||(t?'마지막 수집 '+new Date(t).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):state.ready?'오늘 수집 기록 없음':'불러오는 중');
+  const k=Object.keys(state.snaps).sort().pop();const t=k&&state.snaps[k].updatedAt;
+  const box=$('updated');
+  if(state.err||!t){box.textContent=state.err||(state.ready?'수집 기록 없음':'불러오는 중');box.style.color='';return}
+  const h=(Date.now()-new Date(t))/36e5;
+  const ago=h<1?Math.max(1,Math.round(h*60))+'분 전':h<48?Math.round(h)+'시간 전':Math.round(h/24)+'일 전';
+  box.textContent='마지막 수집 '+new Date(t).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})+' · '+ago;
+  box.style.color=h>3?'var(--live)':'';
 }
 function render(){renderCal();renderDay();renderUpcoming();renderUpdated()}
 function goToday(){state.today=kstToday();state.sel=state.today;[vy,vm]=state.today.split('-').map(Number);render()}

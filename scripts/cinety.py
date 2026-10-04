@@ -119,16 +119,22 @@ def main():
                 posts.append(p)
     if not posts:
         return
-    free = []
+    free, debug = [], {}
     try:
-        for sec in get(MAIN)["data"]["mainDisplayData"]:
+        secs = get(MAIN)["data"]["mainDisplayData"]
+        debug["sections"] = [s.get("title") for s in secs][:40]
+        for sec in secs:
             if "무료" in (sec.get("title") or ""):
                 info = sec.get("display_info")
                 info = json.loads(info) if isinstance(info, str) else info
-                free += info.get("dataInfo") or []
+                rows = (info or {}).get("dataInfo") or []
+                free += list(rows.values()) if isinstance(rows, dict) else rows
     except Exception as e:
+        debug["error"] = repr(e)[:200]
         print("FAIL cinety main", repr(e)[:200])
+    debug["free"] = len(free)
     out = build(posts, free, now)
+    out["debug"] = debug
     json.dump(out, open(STORE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("OK   cinety 공지", len(posts), "작품", len(out["works"]), "일정", len(out["events"]))
 

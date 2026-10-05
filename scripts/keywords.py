@@ -10,7 +10,7 @@ URL = ("https://live.sooplive.co.kr/api/main_broad_list_api.php?selectType=actio
        "&selectValue=all&orderType=view_cnt&pageNo=%d&lang=ko_KR")
 PAGES = 5  # 한 쪽에 60개, 시청자 많은 순
 STOP = set("""방송 생방 생방송 라이브 live on 오늘 오늘도 지금 시작 진행 합니다 해요 하는 하기 하고 같이 함께 그리고
-진짜 그냥 소통 시간 24시간 ing vs the and with 입니다 있는 없는 에서 까지 부터 ㅋㅋ ㅋㅋㅋ ㅎㅎ""".split())
+진짜 그냥 소통 시간 24시간 ing vs the and with 입니다 있는 없는 에서 까지 부터 ㅋㅋ ㅋㅋㅋ ㅎㅎ 현재 도전 신입 오뱅 오뱅알 공지 휴방 방송중 시작합니다""".split())
 
 
 def get(url):
@@ -28,7 +28,6 @@ def num(v):
 
 def words_of(b):
     ws = set(w.lower() for w in re.findall(r"[가-힣A-Za-z0-9]{2,}", b.get("broad_title") or ""))
-    ws |= set(str(h).lower() for h in (b.get("hash_tags") or []) if len(str(h)) >= 2)
     return [w for w in ws if w not in STOP and not w.isdigit()]
 
 

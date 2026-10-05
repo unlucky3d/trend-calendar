@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/collect.py
-      - run: python3 scripts/keywords.py
-      - run: python3 scripts/games_trend.py
+      - run: python3 scripts/collect.py || true
+      - run: python3 scripts/keywords.py || true
+      - run: python3 scripts/games_trend.py || true
       - run: python3 scripts/streamer_news.py || true
       - run: python3 scripts/food_news.py || true
       - run: python3 scripts/cinety.py || true

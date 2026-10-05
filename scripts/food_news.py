@@ -21,19 +21,20 @@ BBQ bhc 교촌 굽네 푸라닭 네네치킨 처갓집 60계 자담치킨 호식
 도미노 피자헛 미스터피자 파파존스 피자알볼로 아웃백 빕스 애슐리 본죽 한솥 홍콩반점 역전우동 새마을식당
 명륜진사갈비 엽기떡볶이 신전떡볶이 청년다방 죠스떡볶이 이삭토스트 에그드랍 김가네 고봉민 본도시락 두찜 샤브올데이 쿠우쿠우""".split()
 BRAND = re.compile("|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)), re.I)
-KIND = re.compile(r"치킨|버거|피자|커피|카페|베이커리|도넛|떡볶이|프랜차이즈|외식|레스토랑|뷔페")
+KIND = re.compile(r"치킨|버거|피자|커피|카페|베이커리|도넛|떡볶이|프랜차이즈|외식|레스토랑|뷔페|도시락|덮밥|분식|디저트|샌드위치|아이스크림")
 
 
 def classify(title):
     """('franchise' 또는 'cvs', 브랜드) 를 돌려준다. 해당 없으면 None."""
-    if not NEW.search(title) or SKIP.search(title):
+    strong = "신메뉴" in title   # 신메뉴라고 적힌 기사는 브랜드 목록에 없어도, 상생·매출 같은 단어가 있어도 넣는다
+    if not NEW.search(title) or (SKIP.search(title) and not strong):
         return None
     if CVS.search(title):
         return "cvs", CVS.search(title).group(0)
     m = BRAND.search(title)
     if m:
         return "franchise", m.group(0)
-    return ("franchise", "") if KIND.search(title) else None
+    return ("franchise", "") if strong or KIND.search(title) else None
 
 
 def day(text):

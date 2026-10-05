@@ -70,7 +70,7 @@
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/207730659",
    "replay": "가능",
-   "live": true
+   "live": false
   },
   {
    "title": "응답하라 1994",
@@ -208,7 +208,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 14,
+  "free": 13,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (9월)",
    "19851789987821100.png"

@@ -62,6 +62,8 @@ h2{font-size:20px;font-weight:800;margin:0;letter-spacing:-.03em}
 .head .sp{flex:1}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:700;transition:.15s}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.btn.on,.btn.on:hover{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
 .cal{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
 .dow,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
 .dow div{padding:10px;font-size:12px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line);text-align:center}
@@ -167,7 +169,7 @@ const $=id=>document.getElementById(id);
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const pad=n=>String(n).padStart(2,'0');
 const kstToday=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul'}).format(new Date());
-const state={today:kstToday(),sel:kstToday(),games:[],cine:{works:[],events:[]},snaps:{},ready:false,err:''};
+const state={today:kstToday(),sel:kstToday(),games:[],cine:{works:[],events:[]},snaps:{},ready:false,err:'',newsCat:'전체'};
 let [vy,vm]=state.today.split('-').map(Number);
 const num=n=>typeof n==='number'?n.toLocaleString('ko-KR'):(n||'');
 const safeUrl=u=>typeof u==='string'&&/^https:\/\//.test(u)?u:null;
@@ -280,7 +282,17 @@ function renderDay(){
     listCard('SOOP 인기 방송','시청자 수',arr(s.soopLive).slice(0,12),(b,i)=>row(i,b.nick,[b.category,b.title].filter(Boolean).join(' · '),num(b.viewers),b.url),'soop'),
     listCard('방송 제목 키워드',s.soopSample?'인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),'soop'));
   const news=arr(s.soopNews);
-  if(news.length){const nw=el('div','cards');nw.append(listCard('콘텐츠 공지','방송국 게시글 · 최근 5일',news.slice(0,40),(p,i)=>row(i,p.title,p.nick+(p.viewers?' · 시청자 '+num(p.viewers)+'명':p.peak?' · 최고 시청자 '+num(p.peak)+'명':'')+(p.reads?' · 조회 '+num(p.reads):'')+(p.tag?' · '+p.tag:'')+(p.body?' · '+p.body.slice(0,60):''),String(p.date).slice(5,10).replace('-','/'),p.url),'live'));body.append(section('스트리머 소식','live','news'),nw)}
+  if(news.length){
+    const cats=['전체',...['배그','마크','노래','종합게임','크루모집','기타'].filter(c=>news.some(n=>n.cat===c))];
+    if(!cats.includes(state.newsCat))state.newsCat='전체';
+    const bar=el('div','filters');
+    cats.forEach(c=>{const fb=el('button','btn'+(c===state.newsCat?' on':''),c+' '+(c==='전체'?news.length:news.filter(n=>n.cat===c).length));fb.type='button';fb.onclick=()=>{state.newsCat=c;renderDay()};bar.append(fb)});
+    const shown=news.filter(n=>state.newsCat==='전체'||n.cat===state.newsCat);
+    const md=x=>(+x.slice(5,7))+'/'+(+x.slice(8,10));
+    const nw=el('div','cards');
+    nw.append(listCard('콘텐츠 공지','방송국 게시글 · 최근 5일',shown.slice(0,40),(p,i)=>row(i,p.title,[p.cat,p.tag,p.deadline?'마감 '+md(p.deadline):'',p.nick,p.viewers?'시청자 '+num(p.viewers)+'명':p.peak?'최고 시청자 '+num(p.peak)+'명':'',p.reads?'조회 '+num(p.reads):'',p.body?String(p.body).slice(0,50):''].filter(Boolean).join(' · '),String(p.date).slice(5,10).replace('-','/'),p.url),'live'));
+    body.append(section('스트리머 소식','live','news'),bar,nw);
+  }
   body.append(section('SOOP 트렌드','soop','soop'),soop);
   const steam=(g,i,sub)=>row(i,g.name,sub,num(g.players)+'명',g.url);
   const gm=el('div','cards');

@@ -283,7 +283,7 @@ function renderDay(){
     listCard('방송 제목 키워드',s.soopSample?'인기 방송 '+s.soopSample+'개 기준':'',arr(s.soopKeywords).slice(0,15),(k,i)=>row(i,k.word,k.count+'개 방송'+(k.isNew?' · 어제 없던 단어':k.change>0?' · 어제보다 +'+num(k.change)+'명':''),num(k.viewers)+'명'),'soop'));
   const news=arr(s.soopNews);
   if(news.length){
-    const cats=['전체',...['배그','마크','노래','종합게임','크루모집','기타'].filter(c=>news.some(n=>n.cat===c))];
+    const cats=['전체',...['배그','마크','롤','스타','노래','크루모집','대회','종합게임','기획','기타'].filter(c=>news.some(n=>n.cat===c))];
     if(!cats.includes(state.newsCat))state.newsCat='전체';
     const bar=el('div','filters');
     cats.forEach(c=>{const fb=el('button','btn'+(c===state.newsCat?' on':''),c+' '+(c==='전체'?news.length:news.filter(n=>n.cat===c).length));fb.type='button';fb.onclick=()=>{state.newsCat=c;renderDay()};bar.append(fb)});

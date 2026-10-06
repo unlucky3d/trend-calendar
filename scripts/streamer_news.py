@@ -19,7 +19,7 @@ MIN_RECRUIT = 100  # 모집 글은 이 조회수부터 보여 준다
 KEEP = 80   # 저장할 글 수
 # 제목으로 글을 분류한다. 어디에도 안 걸리는 글, "신청했다"류의 후기 글, 벌칙·방셀·채용 공지는 숨긴다
 APPLIED = re.compile(r"신청했|신청해|신청함|신청 ?완료|지원했|지원함|참가했|참여했|하고 ?싶|붙었|뽑혔|입주했|입주한|합격했|떨어졌|탈락했")
-SKIP = re.compile(r"편집자|매니저|디자이너|썸네일|PM ?모집|팝니다|삽니다|갖고 ?계신|방셀|리캡|휴방|생방 ?공지|방송 ?공지|벌칙|API|하실 ?분들은|\d+카|알바|작업해 ?주실|자막", re.I)
+SKIP = re.compile(r"편집자|매니저|디자이너|썸네일|PM ?모집|팝니다|삽니다|갖고 ?계신|방셀|리캡|휴방|생방 ?공지|방송 ?공지|벌칙|API|하실 ?분들은|\d+카|알바|작업해 ?주실|자막|같이 ?보실|보러 ?오실|소통하실|사연|정보를 ?찾|일러스트|그리실|오뱅없", re.I)
 RULES = [
     ("모집", re.compile(r"모집|공모|신청자|신청 ?받|신청하신|신청하실|신청 ?방법|신청 ?양식|신청서|참가 ?신청|입주 ?신청|참가자|참여자|지원자|입주자"
                       r"|선발|오디션|구합니다|구해요|구함|구인|구해봅|하실 ?분|오실 ?분|함께하실|같이 ?하실|참여하실|참가하실|접수|선착순|찾습니다|찾아요|찾고 ?있|\[합방\]|합방 ?(모집|하실|멤버)")),
@@ -42,12 +42,22 @@ def classify(title):
 # 글 분류: 위에서부터 먼저 걸리는 것으로 정한다
 CATS = [
     ("배그", re.compile(r"배그|배틀그라운드|PUBG|펍지", re.I)),
-    ("마크", re.compile(r"마크|마인크래프트|그냥서버", re.I)),
+    ("마크", re.compile(r"마크|마인크래프트|그냥 ?서버", re.I)),
+    ("롤", re.compile(r"(?<![가-힣])롤(?![가-힣])|롤 ?(CK|내전|대회|하실)|LOL|리그 ?오브 ?레전드|협곡|칼바람|\bJUG\b|\bADC\b", re.I)),
+    ("스타", re.compile(r"스타크래프트|스타 ?(대회|리그|내전|CK|대학)|빨무|\bASL\b", re.I)),
     ("노래", re.compile(r"노래|보컬|가요|커버곡|음악|합창|밴드|작곡|최애곡|OST", re.I)),
-    ("크루모집", re.compile(r"크루|엔터|동아리|소속사|멤버 ?모집|오디션|클랜|길드|유니온")),
-    ("종합게임", re.compile(r"게임|CK|내전|대회|리그|토너먼트|멸망전|롤|LOL|발로|FC|피파|스타|러스트|서버|와우|WOW|로아|메이플|철권|오버워치|합방", re.I)),
+    ("크루모집", re.compile(r"크루|동아리|소속사|멤버 ?모집|오디션|클랜|길드|유니온|엔터 ?(모집|입사|지원|신입)|신입 ?모집|합격자")),
+    ("대회", re.compile(r"대회|토너먼트|멸망전|챔피언스|공모전|조추첨|드래프트|팀 ?경매|상금")),
+    ("종합게임", re.compile(r"게임|CK|내전|리그|발로|FC|피파|러스트|서버|와우|WOW|로아|메이플|철권|오버워치|동맹|합방", re.I)),
+    ("기획", re.compile(r"컨텐츠|콘텐츠|프로젝트|코스프레|참가자|참여자|상황극|\bRP\b|특집|\S+편", re.I)),
 ]
-DEADLINE = re.compile(r"(?:~|까지|마감)\s*(\d{1,2})\s*[/.월]\s*(\d{1,2})|(\d{1,2})\s*[/.월]\s*(\d{1,2})\s*일?\s*(?:까지|마감)")
+DEADLINES = [
+    # 10/1 ~ 10/11 처럼 기간으로 적힌 경우는 뒤쪽 날짜가 마감
+    re.compile(r"\d{1,2}\s*[/.월]\s*\d{1,2}\s*일?\s*(?:\([^)]*\))?\s*[~\-]\s*(\d{1,2})\s*[/.월]\s*(\d{1,2})"),
+    re.compile(r"(?:~|까지|마감)\s*(\d{1,2})\s*[/.월]\s*(\d{1,2})"),
+    re.compile(r"(\d{1,2})\s*[/.월]\s*(\d{1,2})\s*일?\s*(?:\([^)]*\))?\s*(?:까지|마감)"),
+    re.compile(r"(?:마감|기한)[^\d\n]{0,8}(\d{1,2})\s*[/.월]\s*(\d{1,2})"),
+]
 
 
 def category(text):
@@ -58,16 +68,18 @@ def category(text):
 
 
 def deadline(text, now):
-    """'~10/6', '10월 9일까지', '10/9 마감' 같은 표현에서 마감일을 뽑는다. 없으면 빈 문자열."""
-    m = DEADLINE.search(text)
-    if not m:
-        return ""
-    month, day = int(m.group(1) or m.group(3)), int(m.group(2) or m.group(4))
-    year = now.year + (1 if now.month - month > 6 else -1 if month - now.month > 6 else 0)
-    try:
-        return datetime(year, month, day).strftime("%Y-%m-%d")
-    except ValueError:
-        return ""
+    """'~10/6', '10월 9일까지', '10/9 마감', '마감은 10월 18일' 같은 표현에서 마감일을 뽑는다. 없으면 빈 문자열."""
+    for rule in DEADLINES:
+        m = rule.search(text)
+        if not m:
+            continue
+        month, day = int(m.group(1)), int(m.group(2))
+        year = now.year + (1 if now.month - month > 6 else -1 if month - now.month > 6 else 0)
+        try:
+            return datetime(year, month, day).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    return ""
 
 
 def get(url):

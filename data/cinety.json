@@ -62,7 +62,7 @@
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/207346663",
    "replay": "불가능",
-   "live": true
+   "live": false
   },
   {
    "title": "해적: 바다로 간 산적",
@@ -177,7 +177,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 15,
+  "free": 14,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (9월)",
    "19851789987821100.png"

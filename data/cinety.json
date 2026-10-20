@@ -95,7 +95,7 @@
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/209063297",
    "replay": "불가능",
-   "live": true
+   "live": false
   },
   {
    "title": "원펀맨 1기",
@@ -177,7 +177,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 13,
+  "free": 12,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (9월)",
    "19261792042428573.png"

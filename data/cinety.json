@@ -118,7 +118,7 @@
    "kind": "애니메이션",
    "url": "https://cinety.sooplive.com/board/notice/210390903",
    "replay": "불가능",
-   "live": true
+   "live": false
   }
  ],
  "events": [
@@ -168,7 +168,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 12,
+  "free": 11,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (9월)",
    "65301792546736880.png"

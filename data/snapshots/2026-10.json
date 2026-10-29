@@ -35200,361 +35200,361 @@
   "soopCategories": [
    {
     "name": "FC 온라인",
-    "viewers": 11183
+    "viewers": 11108
    },
    {
     "name": "여행",
-    "viewers": 6618
+    "viewers": 10374
    },
    {
     "name": "토크/캠방",
-    "viewers": 6317
-   },
-   {
-    "name": "주식",
-    "viewers": 4910
-   },
-   {
-    "name": "마인크래프트",
-    "viewers": 3272
+    "viewers": 8919
    },
    {
     "name": "버추얼",
-    "viewers": 3211
+    "viewers": 4874
    },
    {
-    "name": "LCK",
-    "viewers": 2265
+    "name": "주식",
+    "viewers": 4274
    },
    {
-    "name": "음악 스트리밍",
-    "viewers": 1661
-   },
-   {
-    "name": "먹방/쿡방",
-    "viewers": 1400
-   },
-   {
-    "name": "도깨비의세계",
-    "viewers": 1228
-   },
-   {
-    "name": "리그 오브 레전드",
-    "viewers": 1222
+    "name": "마인크래프트",
+    "viewers": 2080
    },
    {
     "name": "메이플스토리 월드",
-    "viewers": 1205
+    "viewers": 2063
    },
    {
-    "name": "스타크래프트",
-    "viewers": 1136
+    "name": "LCK",
+    "viewers": 1800
+   },
+   {
+    "name": "먹방/쿡방",
+    "viewers": 1720
+   },
+   {
+    "name": "음악 스트리밍",
+    "viewers": 1660
+   },
+   {
+    "name": "도깨비의세계",
+    "viewers": 1580
+   },
+   {
+    "name": "리그 오브 레전드",
+    "viewers": 1405
    },
    {
     "name": "PUBG: 배틀그라운드",
-    "viewers": 1083
+    "viewers": 1192
    },
    {
     "name": "서든어택",
-    "viewers": 902
+    "viewers": 846
+   },
+   {
+    "name": "스타크래프트",
+    "viewers": 754
    }
   ],
   "soopLive": [
    {
     "nick": "두치와뿌꾸",
-    "title": "밤 사이 많은 일들이 있었네요 \"엪온뉴스\" 시작합니다 [감컴 어인섬] 피파4",
+    "title": "1시) 신규패키지 몸빵현질 + 신규시즌 리뷰 방송 시작합니다 [감컴 어인섬] 피파4",
     "category": "FC 온라인",
-    "viewers": 10588,
+    "viewers": 9901,
     "url": "https://play.sooplive.co.kr/galsa/298191611"
-   },
-   {
-    "nick": "정윤종..",
-    "title": "주식 삼성전자 실적발표!!",
-    "category": "주식",
-    "viewers": 2996,
-    "url": "https://play.sooplive.co.kr/ioioiobb/298191281"
-   },
-   {
-    "nick": "LCK_KR",
-    "title": "[CC] 2026 Worlds 스위스 스테이지 4R 다시보기",
-    "category": "LCK",
-    "viewers": 2262,
-    "url": "https://play.sooplive.co.kr/aflol/298189649"
-   },
-   {
-    "nick": "강덕구",
-    "title": "강덕구 설악산 단풍 여행 1박2일",
-    "category": "여행",
-    "viewers": 2144,
-    "url": "https://play.sooplive.co.kr/sdkels/298190921"
-   },
-   {
-    "nick": "s시조새s",
-    "title": "jup)새밀리가 떳다 일찍와주길바래",
-    "category": "토크/캠방",
-    "viewers": 1737,
-    "url": "https://play.sooplive.co.kr/superbsw123/298191605"
-   },
-   {
-    "nick": "오메킴승현2",
-    "title": "오메킴 주식 삼성전자실발!! 우주를 들어줘 ㅠ_ㅠ",
-    "category": "주식",
-    "viewers": 1556,
-    "url": "https://play.sooplive.co.kr/rlatldgus/298191205"
-   },
-   {
-    "nick": "범프리카",
-    "title": "생)신포시장 먹거리탐방 시장왕 범프리카",
-    "category": "먹방/쿡방",
-    "viewers": 984,
-    "url": "https://play.sooplive.co.kr/120510/298190897"
    },
    {
     "nick": "이지상:)",
     "title": "제주도 해린민지 해피데이 [무수]",
     "category": "여행",
-    "viewers": 932,
+    "viewers": 3772,
     "url": "https://play.sooplive.co.kr/jrdart/298192891"
    },
    {
-    "nick": "기뉴다",
-    "title": "기뉴다 네얼간이 일본 국립박물관 갑니다",
+    "nick": "정윤종..",
+    "title": "주식 삼성전자 실적발표!!",
+    "category": "주식",
+    "viewers": 2644,
+    "url": "https://play.sooplive.co.kr/ioioiobb/298191281"
+   },
+   {
+    "nick": "강덕구",
+    "title": "강덕구 설악산 단풍 여행 하.....여긴 어디...",
     "category": "여행",
-    "viewers": 876,
-    "url": "https://play.sooplive.co.kr/arinbbidol/298192587"
+    "viewers": 2126,
+    "url": "https://play.sooplive.co.kr/sdkels/298190921"
+   },
+   {
+    "nick": "s시조새s",
+    "title": "jup)첫 시골여행 오늘재미없으면 집보냅니다",
+    "category": "토크/캠방",
+    "viewers": 1797,
+    "url": "https://play.sooplive.co.kr/superbsw123/298191605"
+   },
+   {
+    "nick": "LCK_KR",
+    "title": "[CC] 2026 Worlds 스위스 스테이지 4R 다시보기",
+    "category": "LCK",
+    "viewers": 1766,
+    "url": "https://play.sooplive.co.kr/aflol/298189649"
+   },
+   {
+    "nick": "오메킴승현2",
+    "title": "오메킴 주식 삼성전자실발!! 우주를 들어줘 ㅠ_ㅠ",
+    "category": "주식",
+    "viewers": 1318,
+    "url": "https://play.sooplive.co.kr/rlatldgus/298191205"
    },
    {
     "nick": "개그맨임재백",
     "title": "[세얼간이17화]메이드카페OPEN_최도랑x갓쪼[뉴캣슬,최가네]",
     "category": "토크/캠방",
-    "viewers": 849,
+    "viewers": 1317,
     "url": "https://play.sooplive.co.kr/4rangjjh/298191819"
    },
    {
-    "nick": "김진솔",
-    "title": "CCTV ..",
-    "category": "도깨비의세계",
-    "viewers": 838,
-    "url": "https://play.sooplive.co.kr/kissday621/298168317"
+    "nick": "범프리카",
+    "title": "생)신포시장 먹거리탐방 시장왕 범프리카",
+    "category": "먹방/쿡방",
+    "viewers": 1237,
+    "url": "https://play.sooplive.co.kr/120510/298190897"
    },
    {
-    "nick": "문모모",
-    "title": "자기전에 잠깐 농사힐링 [로이세끼]",
-    "category": "마인크래프트",
-    "viewers": 777,
-    "url": "https://play.sooplive.co.kr/doormomo/298190605"
+    "nick": "유쾌쌍디풍디",
+    "title": "기웃기웃 진지한 고민이생겼습니다! 그러나..?",
+    "category": "여행",
+    "viewers": 1085,
+    "url": "https://play.sooplive.co.kr/dlrnf/298192907"
+   },
+   {
+    "nick": "[애견]조성근",
+    "title": "조트콤)부산엄마ㅡㅡㅡ부캉이부산상어",
+    "category": "여행",
+    "viewers": 998,
+    "url": "https://play.sooplive.co.kr/kimpocinema/298192423"
+   },
+   {
+    "nick": "박가린님[♥]",
+    "title": "FA엑셀  드릴말씀이 있습니다 [GD컴퍼니]",
+    "category": "토크/캠방",
+    "viewers": 955,
+    "url": "https://play.sooplive.co.kr/janjju/298193469"
    }
   ],
-  "updatedAt": "2026-10-29T02:12:31Z",
+  "updatedAt": "2026-10-29T03:06:19Z",
   "summary": "SOOP 인기 카테고리: FC 온라인, 여행, 토크/캠방\n7일 안 출시: 팬텀 블레이드 제로(10/29), The Wolf Among Us 리마스터(10/29), 붉은사막 DLC: 미지의 여정(10/30), 월드 오브 워크래프트: 포에버(11/05)",
   "soopKeywords": [
    {
     "word": "피파4",
-    "count": 3,
-    "viewers": 11200,
+    "count": 4,
+    "viewers": 11122,
     "change": null,
     "isNew": true
    },
    {
     "word": "어인섬",
-    "count": 2,
-    "viewers": 10912,
+    "count": 3,
+    "viewers": 10387,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "1시",
+    "count": 3,
+    "viewers": 10124,
     "change": null,
     "isNew": true
    },
    {
     "word": "주식",
-    "count": 6,
-    "viewers": 4788,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "실적발표",
-    "count": 2,
-    "viewers": 3012,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "여행",
-    "count": 2,
-    "viewers": 2548,
-    "change": -10963,
-    "isNew": false
-   },
-   {
-    "word": "다시보기",
-    "count": 2,
-    "viewers": 2315,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "로이세끼",
-    "count": 3,
-    "viewers": 1582,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "무수",
-    "count": 2,
-    "viewers": 1542,
-    "change": -2773,
-    "isNew": false
-   },
-   {
-    "word": "일본",
-    "count": 2,
-    "viewers": 1127,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "최가네",
-    "count": 2,
-    "viewers": 990,
+    "count": 5,
+    "viewers": 4176,
     "change": null,
     "isNew": true
    },
    {
     "word": "제주도",
     "count": 2,
-    "viewers": 950,
+    "viewers": 3792,
     "change": null,
     "isNew": true
    },
    {
-    "word": "내가",
-    "count": 4,
-    "viewers": 931,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "뉴캣슬",
+    "word": "여행",
     "count": 2,
-    "viewers": 926,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "차카데미",
-    "count": 5,
-    "viewers": 883,
-    "change": -3837,
+    "viewers": 2537,
+    "change": -10974,
     "isNew": false
    },
    {
-    "word": "cctv",
+    "word": "jup",
     "count": 2,
-    "viewers": 866,
+    "viewers": 2079,
     "change": null,
     "isNew": true
    },
    {
-    "word": "시즌2",
+    "word": "갑니다",
     "count": 3,
-    "viewers": 823,
+    "viewers": 1935,
+    "change": -6741,
+    "isNew": false
+   },
+   {
+    "word": "일본",
+    "count": 3,
+    "viewers": 1932,
     "change": null,
     "isNew": true
    },
    {
-    "word": "음악방송",
+    "word": "다시보기",
     "count": 2,
-    "viewers": 765,
+    "viewers": 1825,
     "change": null,
     "isNew": true
    },
    {
-    "word": "지능",
+    "word": "worlds",
     "count": 2,
-    "viewers": 750,
+    "viewers": 1788,
     "change": null,
     "isNew": true
    },
    {
-    "word": "해피월드",
-    "count": 11,
-    "viewers": 727,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "fc온라인",
-    "count": 2,
-    "viewers": 612,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "마법학교",
-    "count": 2,
-    "viewers": 610,
+    "word": "최가네",
+    "count": 3,
+    "viewers": 1553,
     "change": null,
     "isNew": true
    },
    {
     "word": "메이플플래닛",
     "count": 4,
-    "viewers": 545,
+    "viewers": 1424,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "뉴캣슬",
+    "count": 2,
+    "viewers": 1370,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "fc온라인",
+    "count": 2,
+    "viewers": 1169,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "신규시즌출시",
+    "count": 2,
+    "viewers": 1169,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "패치노트",
+    "count": 2,
+    "viewers": 802,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "음악방송",
+    "count": 2,
+    "viewers": 773,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "해피월드",
+    "count": 11,
+    "viewers": 732,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "마법학교",
+    "count": 2,
+    "viewers": 703,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "내가",
+    "count": 4,
+    "viewers": 673,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "방셀",
+    "count": 10,
+    "viewers": 669,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "4주년",
+    "count": 2,
+    "viewers": 644,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "니케",
+    "count": 2,
+    "viewers": 644,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "시즌2",
+    "count": 2,
+    "viewers": 598,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "로이세끼",
+    "count": 2,
+    "viewers": 598,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "판타지유",
+    "count": 3,
+    "viewers": 560,
+    "change": null,
+    "isNew": true
+   },
+   {
+    "word": "뻐스시간",
+    "count": 3,
+    "viewers": 558,
     "change": null,
     "isNew": true
    },
    {
     "word": "굿모닝",
     "count": 3,
-    "viewers": 483,
+    "viewers": 531,
     "change": null,
     "isNew": true
    },
    {
-    "word": "최신가요",
-    "count": 6,
-    "viewers": 474,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "판타지유",
+    "word": "제발",
     "count": 2,
-    "viewers": 454,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "뉴엔터",
-    "count": 2,
-    "viewers": 439,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "패치노트",
-    "count": 3,
-    "viewers": 417,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "방셀",
-    "count": 8,
-    "viewers": 389,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "아침",
-    "count": 5,
-    "viewers": 374,
-    "change": null,
-    "isNew": true
-   },
-   {
-    "word": "좋은",
-    "count": 2,
-    "viewers": 373,
+    "viewers": 499,
     "change": null,
     "isNew": true
    }
@@ -35563,78 +35563,78 @@
   "chzzk": [
    {
     "name": "승리의 여신: 니케",
-    "viewers": 6022,
-    "count": 15
-   },
-   {
-    "name": "다키스트 던전",
-    "viewers": 5700,
-    "count": 6
-   },
-   {
-    "name": "더 롱 다크",
-    "viewers": 4844,
-    "count": 1
+    "viewers": 6616,
+    "count": 17
    },
    {
     "name": "팬텀 블레이드 제로",
-    "viewers": 4762,
-    "count": 11
-   },
-   {
-    "name": "리그 오브 레전드",
-    "viewers": 3071,
-    "count": 8
-   },
-   {
-    "name": "워독스",
-    "viewers": 2465,
-    "count": 7
-   },
-   {
-    "name": "메이플스토리",
-    "viewers": 1820,
-    "count": 9
-   },
-   {
-    "name": "아이 돈트 폴",
-    "viewers": 1605,
-    "count": 2
-   },
-   {
-    "name": "로스트아크",
-    "viewers": 1465,
+    "viewers": 6297,
     "count": 13
    },
    {
-    "name": "검은사막",
-    "viewers": 1211,
-    "count": 6
-   },
-   {
-    "name": "데드 바이 데이라이트",
-    "viewers": 1161,
+    "name": "다키스트 던전",
+    "viewers": 5283,
     "count": 5
    },
    {
-    "name": "도깨비의세계",
-    "viewers": 970,
-    "count": 5
+    "name": "워독스",
+    "viewers": 2843,
+    "count": 9
    },
    {
-    "name": "콜 오브 듀티: 모던 워페어 4",
-    "viewers": 918,
-    "count": 3
+    "name": "리그 오브 레전드",
+    "viewers": 2733,
+    "count": 8
    },
    {
-    "name": "데이 아 빌리언즈",
-    "viewers": 765,
+    "name": "로스트아크",
+    "viewers": 2297,
+    "count": 16
+   },
+   {
+    "name": "아이 돈트 폴",
+    "viewers": 1749,
     "count": 2
    },
    {
-    "name": "용과 같이 8",
-    "viewers": 457,
+    "name": "데드 바이 데이라이트",
+    "viewers": 1355,
+    "count": 4
+   },
+   {
+    "name": "검은사막",
+    "viewers": 1200,
+    "count": 7
+   },
+   {
+    "name": "콜 오브 듀티: 모던 워페어 4",
+    "viewers": 1099,
+    "count": 4
+   },
+   {
+    "name": "도깨비의세계",
+    "viewers": 999,
+    "count": 4
+   },
+   {
+    "name": "데이 아 빌리언즈",
+    "viewers": 946,
+    "count": 2
+   },
+   {
+    "name": "이터널 리턴",
+    "viewers": 686,
+    "count": 3
+   },
+   {
+    "name": "하스스톤",
+    "viewers": 554,
     "count": 1
+   },
+   {
+    "name": "메이플스토리 월드",
+    "viewers": 499,
+    "count": 2
    }
   ],
   "twitch": [
@@ -35690,6 +35690,10 @@
     "url": "https://store.steampowered.com/app/4435490"
    },
    {
+    "name": "Phantom Blade Zero",
+    "url": "https://store.steampowered.com/app/4115450"
+   },
+   {
     "name": "붉은사막 Enhanced: 미지의 여정",
     "url": "https://store.steampowered.com/app/5001840"
    },
@@ -35702,6 +35706,10 @@
     "url": "https://store.steampowered.com/app/4435640"
    },
    {
+    "name": "아키에이지 크로니클",
+    "url": "https://store.steampowered.com/app/3218230"
+   },
+   {
     "name": "WARDOGS",
     "url": "https://store.steampowered.com/app/1867240"
    },
@@ -35710,16 +35718,8 @@
     "url": "https://store.steampowered.com/app/2638890"
    },
    {
-    "name": "아노말리스／ANOMALITH",
-    "url": "https://store.steampowered.com/app/4017880"
-   },
-   {
     "name": "Moon Sweepers",
     "url": "https://store.steampowered.com/app/5335510"
-   },
-   {
-    "name": "아키에이지 크로니클",
-    "url": "https://store.steampowered.com/app/3218230"
    }
   ],
   "steamTop": [
@@ -35905,7 +35905,7 @@
     "date": "2026-10-28 03:52",
     "cat": "롤",
     "deadline": "",
-    "reads": 43599,
+    "reads": 43612,
     "tag": "모집",
     "viewers": 0,
     "peak": 47323,
@@ -35920,7 +35920,7 @@
     "date": "2026-10-29 05:26",
     "cat": "크루모집",
     "deadline": "",
-    "reads": 22024,
+    "reads": 24424,
     "tag": "모집",
     "viewers": 0,
     "peak": 35741,
@@ -35935,7 +35935,7 @@
     "date": "2026-10-25 15:18",
     "cat": "종합게임",
     "deadline": "",
-    "reads": 21599,
+    "reads": 21605,
     "tag": "모집",
     "viewers": 0,
     "peak": 25524,
@@ -35950,27 +35950,12 @@
     "date": "2026-10-25 03:48",
     "cat": "기타",
     "deadline": "",
-    "reads": 2859,
+    "reads": 2860,
     "tag": "대회",
-    "viewers": 614,
+    "viewers": 0,
     "peak": 20544,
     "watched": false,
     "url": "https://www.sooplive.com/station/qn308dud/post/210738179"
-   },
-   {
-    "id": "jk890202",
-    "nick": "JuM.윤중2",
-    "title": "3시 드림즈 마예준대회 56티어 출전!!",
-    "body": "우리 칭구들 주서리 모리 효짱많은 응원부탁드립니다저는 STX vs SKT 방송6시에 모이도록하겠습니다",
-    "date": "2026-10-25 08:53",
-    "cat": "대회",
-    "deadline": "",
-    "reads": 1810,
-    "tag": "대회",
-    "viewers": 0,
-    "peak": 13464,
-    "watched": false,
-    "url": "https://www.sooplive.com/station/jk890202/post/210746999"
    },
    {
     "id": "jk890202",
@@ -35980,7 +35965,7 @@
     "date": "2026-10-29 01:21",
     "cat": "노래",
     "deadline": "",
-    "reads": 1174,
+    "reads": 1258,
     "tag": "대회",
     "viewers": 0,
     "peak": 13464,
@@ -35995,7 +35980,7 @@
     "date": "2026-10-26 15:38",
     "cat": "스타",
     "deadline": "",
-    "reads": 3842,
+    "reads": 3851,
     "tag": "대회",
     "viewers": 0,
     "peak": 9680,
@@ -36025,9 +36010,9 @@
     "date": "2026-10-27 11:39",
     "cat": "크루모집",
     "deadline": "",
-    "reads": 3829,
+    "reads": 3847,
     "tag": "모집",
-    "viewers": 0,
+    "viewers": 356,
     "peak": 9148,
     "watched": false,
     "url": "https://www.sooplive.com/station/cnsgkcnehd74/post/210937377"
@@ -36040,7 +36025,7 @@
     "date": "2026-10-24 21:08",
     "cat": "기획",
     "deadline": "",
-    "reads": 14332,
+    "reads": 14373,
     "tag": "모집",
     "viewers": 0,
     "peak": 8829,
@@ -36055,7 +36040,7 @@
     "date": "2026-10-27 14:35",
     "cat": "마크",
     "deadline": "",
-    "reads": 4480,
+    "reads": 4484,
     "tag": "모집",
     "viewers": 0,
     "peak": 8195,
@@ -36085,7 +36070,7 @@
     "date": "2026-10-27 19:41",
     "cat": "기획",
     "deadline": "",
-    "reads": 2129,
+    "reads": 2132,
     "tag": "모집",
     "viewers": 0,
     "peak": 7764,
@@ -36100,7 +36085,7 @@
     "date": "2026-10-28 16:02",
     "cat": "기획",
     "deadline": "",
-    "reads": 3589,
+    "reads": 3612,
     "tag": "모집",
     "viewers": 0,
     "peak": 5989,
@@ -36145,9 +36130,9 @@
     "date": "2026-10-25 14:08",
     "cat": "크루모집",
     "deadline": "",
-    "reads": 2622,
+    "reads": 2625,
     "tag": "모집",
-    "viewers": 876,
+    "viewers": 950,
     "peak": 5237,
     "watched": false,
     "url": "https://www.sooplive.com/station/arinbbidol/post/210759399"
@@ -36160,7 +36145,7 @@
     "date": "2026-10-27 23:12",
     "cat": "크루모집",
     "deadline": "",
-    "reads": 4346,
+    "reads": 4381,
     "tag": "모집",
     "viewers": 0,
     "peak": 4946,
@@ -36190,7 +36175,7 @@
     "date": "2026-10-29 04:21",
     "cat": "종합게임",
     "deadline": "",
-    "reads": 2688,
+    "reads": 2905,
     "tag": "모집",
     "viewers": 0,
     "peak": 3677,
@@ -36205,7 +36190,7 @@
     "date": "2026-10-26 10:26",
     "cat": "기획",
     "deadline": "2026-11-01",
-    "reads": 687,
+    "reads": 694,
     "tag": "공지",
     "viewers": 0,
     "peak": 2845,
@@ -36235,9 +36220,9 @@
     "date": "2026-10-25 17:30",
     "cat": "종합게임",
     "deadline": "",
-    "reads": 1639,
+    "reads": 1644,
     "tag": "공지",
-    "viewers": 470,
+    "viewers": 502,
     "peak": 2705,
     "watched": false,
     "url": "https://www.sooplive.com/station/mawang0216/post/210773411"
@@ -36250,7 +36235,7 @@
     "date": "2026-10-27 18:37",
     "cat": "기획",
     "deadline": "",
-    "reads": 1627,
+    "reads": 1631,
     "tag": "모집",
     "viewers": 0,
     "peak": 2225,
@@ -36280,7 +36265,7 @@
     "date": "2026-10-28 14:09",
     "cat": "종합게임",
     "deadline": "",
-    "reads": 2117,
+    "reads": 2135,
     "tag": "모집",
     "viewers": 0,
     "peak": 1934,
@@ -36295,7 +36280,7 @@
     "date": "2026-10-28 09:54",
     "cat": "기타",
     "deadline": "",
-    "reads": 920,
+    "reads": 921,
     "tag": "모집",
     "viewers": 0,
     "peak": 1732,
@@ -36325,7 +36310,7 @@
     "date": "2026-10-25 16:40",
     "cat": "기타",
     "deadline": "",
-    "reads": 1477,
+    "reads": 1478,
     "tag": "대회",
     "viewers": 0,
     "peak": 1624,
@@ -36340,9 +36325,9 @@
     "date": "2026-10-26 21:57",
     "cat": "기타",
     "deadline": "",
-    "reads": 475,
+    "reads": 477,
     "tag": "모집",
-    "viewers": 404,
+    "viewers": 825,
     "peak": 1622,
     "watched": false,
     "url": "https://www.sooplive.com/station/vbvb1230/post/210894881"
@@ -36370,7 +36355,7 @@
     "date": "2026-10-25 21:41",
     "cat": "롤",
     "deadline": "",
-    "reads": 3427,
+    "reads": 3429,
     "tag": "모집",
     "viewers": 0,
     "peak": 1485,
@@ -36417,7 +36402,7 @@
     "deadline": "",
     "reads": 709,
     "tag": "공지",
-    "viewers": 457,
+    "viewers": 520,
     "peak": 1113,
     "watched": false,
     "url": "https://www.sooplive.com/station/vkzm14/post/210869477"
@@ -36505,7 +36490,7 @@
     "date": "2026-10-26 23:00",
     "cat": "노래",
     "deadline": "",
-    "reads": 511,
+    "reads": 512,
     "tag": "대회",
     "viewers": 0,
     "peak": 813,
@@ -36580,9 +36565,9 @@
     "date": "2026-10-26 15:29",
     "cat": "대회",
     "deadline": "",
-    "reads": 11141,
+    "reads": 11274,
     "tag": "대회",
-    "viewers": 76,
+    "viewers": 53,
     "peak": 538,
     "watched": false,
     "url": "https://www.sooplive.com/station/corgi1102/post/210861649"
@@ -36601,21 +36586,6 @@
     "peak": 480,
     "watched": false,
     "url": "https://www.sooplive.com/station/qkfhzhals/post/210958511"
-   },
-   {
-    "id": "89girl",
-    "nick": "노니_",
-    "title": "구독 asmr하면 들으러 오실분?",
-    "body": "잇나//? ",
-    "date": "2026-10-25 10:36",
-    "cat": "기타",
-    "deadline": "",
-    "reads": 127,
-    "tag": "모집",
-    "viewers": 20,
-    "peak": 194,
-    "watched": false,
-    "url": "https://www.sooplive.com/station/89girl/post/210750171"
    }
   ],
   "food": {

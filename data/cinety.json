@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31",
+ "updated": "2026-11-01",
  "works": [
   {
    "title": "은혼",
@@ -118,6 +118,16 @@
    "kind": "애니메이션",
    "url": "https://cinety.sooplive.com/board/notice/210390903",
    "replay": "불가능",
+   "live": false
+  },
+  {
+   "title": "메이저 1-6기",
+   "start": "2027-04-15",
+   "startTime": "오후 3시",
+   "end": "",
+   "endTime": "",
+   "kind": "애니메이션",
+   "url": "https://cinety.sooplive.com/board/notice/192833211",
    "live": false
   }
  ],

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-18",
  "works": [
   {
    "title": "나의 히어로 아카데미아 5-6기",
@@ -131,6 +131,16 @@
    "live": true
   },
   {
+   "title": "공동경비구역 JSA",
+   "start": "2026-11-17",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/212875351",
+   "live": true
+  },
+  {
    "title": "메이저 1-6기",
    "start": "2027-04-15",
    "startTime": "오후 3시",
@@ -196,7 +206,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 11,
+  "free": 12,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (11월)",
    "78631794472763322.png"

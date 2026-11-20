@@ -141,6 +141,16 @@
    "live": true
   },
   {
+   "title": "폴: 600미터",
+   "start": "2026-11-20",
+   "startTime": "저녁 6시",
+   "end": "",
+   "endTime": "",
+   "kind": "영화",
+   "url": "https://cinety.sooplive.com/board/notice/213130475",
+   "live": true
+  },
+  {
    "title": "메이저 1-6기",
    "start": "2027-04-15",
    "startTime": "오후 3시",
@@ -206,7 +216,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 12,
+  "free": 13,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (11월)",
    "78631794472763322.png"

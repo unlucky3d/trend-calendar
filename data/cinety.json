@@ -118,7 +118,7 @@
    "endTime": "오후 3시",
    "kind": "영화",
    "url": "https://cinety.sooplive.com/board/notice/212330811",
-   "live": true
+   "live": false
   },
   {
    "title": "타인은 지옥이다",
@@ -208,7 +208,7 @@
    "영화·드라마·애니메이션 전 회차 무료 시청!",
    "이런 콘텐츠는 어때요?"
   ],
-  "free": 14,
+  "free": 13,
   "schedule": [
    "[공지] 같이보기 콘텐츠 일정 정리 (11월)",
    "78631794472763322.png"
